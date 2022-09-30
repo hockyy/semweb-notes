@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>05</title>
+</head>
+<body><h4 id='basic-graph-pattern'>Basic Graph Pattern</h4>
+<p>Intinya merupakan himpunan triple pattern, sebuah tuple \(Q(V, E, L)\).</p>
+<ul>
+<li>\(V\) itu \(\subseteq\) himpunan node terms</li>
+<li>\(L\) itu \(\subseteq\) himpunan edge label atau terms</li>
+<li>\(E\) itu \(\subseteq V\times L \times V\) himpunan edgesnya</li>
+
+</ul>
+<p>Diberikan sebuah BGP \(Q\), yang di atas tadi, definisikan \(\text{Var}(Q)\) adalah himpunan semua variabel yang muncul pada \(Q\), variabel itu yang ga konstan dan belum dibinding valuenya. Misalkan \(\mu: \text{Var} \rightarrow \text{Con}\) , <strong>merupakan sebuah partial mapping</strong>, dari variabel ke konstan pada domainnya si \(\mu\), \(\text{Con}\) nya bisa berupa \(V\) atau \(E\) yang penting constant semua isinya.</p>
+<p>\(\text{dom}(\mu)\): Semua variabel pada mapping \(\mu\),</p>
+<p>\(\mu\) dikatakan solusi terhadap \(G\) jika dan hanya jika data graphnya \(\mu(Q)\) <strong>merupakan subgraph dari data graph</strong> \(G\). \(Q(G)\) itu merupakan multiset of solution mapping.</p>
+<div>$$
+Q(G)=\{\mu \mid \mu(Q) \subseteq G \and \operatorname{dom}(\mu) \subseteq \operatorname{Var}(Q)\}
+$$</div>
+<p>Bila kita tidak bisa menemukan solution mapping \(\mu\), yang merupakan subgraph terhadap query \(Q\) nya itu \(G\), dan domain dari \(\mu\) nya merupakan variabel dari \(Q\), artinya semua \(\mu\) itu memetakan variabel dari \(Q\). Kenapa \(\text{dom}(\mu) \subseteq \text{Var}(Q)\), karena tidak semua domainnya perlu kita jawab dan tidak semuanya perlu kita kembalikan semuanya, tapi bisa saja ada query, misalnya kaya</p>
+<pre><code class='language-sparql' lang='sparql'>select ?ev
+where {
+  ?ev rdf:type ex:FoodFestival ;
+  exv:venue ?vn1, ?vn2 .
+}
+</code></pre>
+<p>Perhatikan bahwa disini yang perlu kita ambil cuma variabel <code>?ev</code> nya, tidak perlu \(\text{dom}(\mu) = \text{Var}(Q)\). </p>
+<p>Kita katakan data graph \(G_1\) itu subgraph dari \(G_2\) jika dan hanya jika \(V_1 \subseteq V_2, E_1 \subseteq E_2\) dan \(L_1 \subseteq L_2\)</p>
+<ol start='' >
+<li>\(\mu=\{\) ?ev \(\mapsto\) ElD16, ?vn1 \(\mapsto\) Piscina Olimpica, ?vn2 \(\mapsto\) Sotomayor \(\}\)
+\(\mu(Q)=\{(\) EID16, type, Food Festival), (EID16, venue, Priscina Olímpica), (EID16, venue, Sotomayor) \(\}\)</li>
+
+</ol>
+<ul>
+<li>Is \(\mu(Q) \subseteq G\) ? <strong>Yes</strong>.</li>
+
+</ul>
+<ol start='2' >
+<li>\(\mu=\{\) ?ev \(\mapsto\) ElD16, ?vn1 \(\mapsto\) Sotomayor, ?vn2 \(\mapsto\) Piscina Olimpica \(\}\)
+\(\mu(Q)=\{(\) EID16, type, Food Festival), (EID16, venue, Sotomayor), (EID16, venue, Priscina Olimpica)</li>
+
+</ol>
+<ul>
+<li>Is \(\mu(Q) \subseteq G\) ? <strong>Yes</strong>.</li>
+
+</ul>
+<ol start='3' >
+<li>\(\mu=\{\) ?ev \(\mapsto\) EID16, ?vn1 \(\mapsto\) Piscina Olimpica, ?vn2 \(\mapsto\) Piscina Olímpica \(\}\)
+\(\mu(Q)=\{(\) EID16, type, Food Festival), (EID16, venue, Priscina Olimpica) \(\}\)</li>
+
+</ol>
+<ul>
+<li>Is \(\mu(Q) \subseteq G\) ? <strong>Yes</strong>.</li>
+
+</ul>
+<p>Perhatikan bahwa \(\mu(Q)\) merupakan set atau himpunan.</p>
+<p>Perhatikan bahwa solusi mapping \(\mu\) bisa saja \(= \empty\), jadi \(Q(G) = \{\empty\}\), bisa terjadi saat \(\text{Var}(Q) = \empty\), dan ada solusi yang ditemukan. Kalau misalkan tidak ada solution maka \(Q(G) = \{\} = \empty\). Bila direcap, menjawab query itu pada dasarnya mengevaluasi BGP pada data graphnya.</p>
+<h4 id='blank-nodes-in-query'>Blank nodes in Query</h4>
+<p>Blank nodes dibolehkan pada graph pattern:</p>
+<ul>
+<li>Bisa muncul pada bagian subjek atau objek dari triple (node).</li>
+<li>Diberikan ID tertentu, dan dianggap seperti variabel.</li>
+<li>Seperti variabel, tapi tidak bisa diselect dan diproyeksikan.</li>
+
+</ul>
+<p>Blamk modes bisa muncul pada solusi query atau mapping</p>
+<ul>
+<li>Direpresentasikan dengan entiti yang tidak diketahui.</li>
+
+</ul>
+<p>Perhatikan dua query yang equivalen berikut ini, menggunakan blank nodes. Blank nodes ini bukan literally mengquery blank nodes, tapi jatohnya cuma dummy variable yang ga kepake doang.</p>
+<pre><code class='language-sparql' lang='sparql'>select ?event ?city where{
+	?event rdf:type ?type ;
+				 exv:venue ?ven .
+	?ven 	 exv:city ?city .
+}
+</code></pre>
+<pre><code class='language-sparql' lang='sparql'>select ?event ?city where{
+	?event rdf:type [] ;
+				 exv:venue [ exv:city ?city ].
+}
+</code></pre>
+<h4 id='query-involving-literals'>Query involving Literals</h4>
+<p>Untuk ngematch literal, datatypenya juga harus cocok, bagian yang di dalam tanda petik itu namanya bentuk lexical.</p>
+<pre><code class='language-turtle' lang='turtle'>@prefix ex: &lt;http://example.org/data/&gt; .
+@prefix exv: &lt;http://example.org/vocab#&gt; .
+
+ex:ex1 exv:p &quot;test&quot; .
+ex:ex2 exv:p &quot;test&quot;^^xsd:string .
+ex:ex3 exv:p &quot;test&quot;@en .
+ex:ex4 exv:p &quot;42&quot;^^xsd:integer .
+ex:ex5 exv:p 42 .
+</code></pre>
+<p>Perhatikan contoh <code>ex:ex6 exv:p &quot;test&quot;^^xsd:integer</code> secara syntax ok, tapi graphnya semantiknya unsatisfiable. <code>&quot;test&quot;</code> itu bagian lexicalnya, dan <code>xsd:integer</code> itu typenya. Semantic wise saat dievaluasi, tidak boleh ada lexical yang tidak cocok dengan data typenya.</p>
+<pre><code class='language-sparql' lang='sparql'>prefix exv: &lt;http://example.org/vocab#&gt; 
+SELECT * WHERE {
+  ?s exv:p &quot;test&quot; .
+}
+</code></pre>
+<p>Query di atas bakal ngereturn ex1, ex2 doang, karena yang en itu typenya <code>rdf:langString</code>.</p>
+<pre><code class='language-sparql' lang='sparql'>prefix exv: &lt;http://example.org/vocab#&gt; 
+SELECT * WHERE {
+  ?s exv:p &quot;test&quot;@en .
+}
+</code></pre>
+<p>Query di atas bakal ngereturn ex3 doang.</p>
+<pre><code class='language-sparql' lang='sparql'>prefix exv: &lt;http://example.org/vocab#&gt; 
+SELECT * WHERE {
+  ?s exv:p 42 .
+}
+</code></pre>
+<p>Bakal ngereturn ex4 ex5 juga. Untuk numeric integer, ada syntatic sugarnya, jadi bisa langsung aja ditulis 42 di ex5</p>
+<h4 id='select-syntax-projection'>Select Syntax (Projection)</h4>
+<p>Ada projection, serupa dengan basis data, itu kita bisa bound dia ke variabel list, atau bisa pake * buat ngeselect all variabel, bisa juga pake DISTINCT buat ngeremove non unique result.</p>
+<pre><code class='language-sparql' lang='sparql'>prefix exv: &lt;http://example.org/vocab#&gt; 
+SELECT DISTINCT ?s ?a WHERE {
+  ?s exv:p 42 .
+}
+</code></pre>
+<p>di sini, <code>?a</code> nya bakal kosong di column resultnya.</p>
+<p>Ada pula UNION, kita tulisin {\(P_1\)} UNION {\(P_2\)}, untuk merepresentasikan dua pola graf, \(P_1\) dan \(P_2\).</p>
+<p>Pada set unionnya itu tetap unique, sementara pada multiset, unionnya simply di plus.</p>
+<p>Contoh:</p>
+<pre><code class='language-sparql' lang='sparql'>PREFIX exv: &lt;http://example.org/vocab#&gt;
+PREFIX ex: &lt;http://example.org/&gt;
+
+SELECT ?name ?city WHERE {
+  ?event exv:venue ?ven ;
+    exv:name ?name .
+  {
+    ?ven exv:city ex:Santiago .
+  } UNION {
+    ?ven exv:city ex:Arica .
+  }
+  ?ven exv:city ?city
+}
+</code></pre>
+<p>Hasilnya adalah</p>
+<pre><code>p1 join (p2 union p3) join p4
+</code></pre>
+<figure><table>
+<thead>
+<tr><th>name</th><th>city</th></tr></thead>
+<tbody><tr><td>Santiago a Mil</td><td><a href='http://localhost:9999/blazegraph/#explore:kb:'></a></td></tr><tr><td>Ñam</td><td><a href='http://localhost:9999/blazegraph/#explore:kb:'></a></td></tr><tr><td>Food Truck</td><td><a href='http://localhost:9999/blazegraph/#explore:kb:'></a></td></tr></tbody>
+</table></figure>
+<p>Perhatikan juga sifat sifat union:</p>
+<ul>
+<li>Komutatif dan left-asosiatif</li>
+<li>precedencenya setara dengan OPTIONAL</li>
+<li>precedencenya lebih tinggi dari pada conjunction biasa, sehingga bakal diproses duluan, istilahnya kaya perkalian di kalibataku.</li>
+
+</ul>
+<p>Reference: <a href='https://www.cs.miami.edu/home/visser/csc751-files/sparql.pdf' target='_blank' class='url'>https://www.cs.miami.edu/home/visser/csc751-files/sparql.pdf</a></p>
+<p>Selain itu, ada pula operasi left join, atau yang dikenal dengan optional</p>
+<ul>
+<li>\(P_1\) OPTIONAL {\(P_2\)} artinya dapetin semua solusi mapping buat \(P_1\), terus secara opsional join mappingnya dengan \(P_2\) kalo ada.</li>
+<li>Kalau solution mapping dari \(P_1\) ga bisa dijoin dengan solusi apapun dari \(P_2\) tetap dikembaliin dengan ada unbounded variable.</li>
+
+</ul>
+<pre><code class='language-sparql' lang='sparql'>SELECT ?name ?start WHERE {
+  {
+    { ?event rdf:type exv:FoodFestival . }
+    UNION
+    { ?event rdf:type exv:MusicFestival . }
+  	?event exv:name ?name .
+  }
+  OPTIONAL
+  { ?event exv:start ?start . }
+}
+</code></pre>
+<figure><table>
+<thead>
+<tr><th>?name</th><th>?start</th></tr></thead>
+<tbody><tr><td>Ñam</td><td>2018-03-22T12:00:00.000Z</td></tr><tr><td>Food Truck</td><td>&nbsp;</td></tr><tr><td>Santiago a Mil</td><td>2023-01-09T09:00:00.000Z</td></tr><tr><td>Festival de Viña</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<p>&nbsp;</p>
+</body>
+</html>

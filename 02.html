@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>02</title>
+</head>
+<body><h1 id='bahasa-markup'>Bahasa Markup</h1>
+<p>Struktur, konten dan presentasinya berbeda. Pada bahasa markup, memungkinkan adanya pemisahan bagian bagian konten sehingga bisa dimengerti oleh komputer untuk nantinya dipresentasikan.</p>
+<h2 id='xml'>XML</h2>
+<p>Terdapat utilisasi pada struktur konten, XML itu tagnya bisa dipersonalisasi, validasi, dan penggunaannya banyak di web, dia tidak bergantung pada suatu vendor tertentu, karena merupakan text file, formatnya cenderung sam dan tidak berubah.</p>
+<pre><code class='language-xml' lang='xml'>&lt;note&gt;
+  &lt;to&gt;Tove&lt;/to&gt;
+  &lt;from&gt;Jani&lt;/from&gt;
+  &lt;heading&gt;Reminder&lt;/heading&gt;
+  &lt;body&gt;Don&#39;t forget me this weekend!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre>
+<p>XML itu notasinya agak susah dibaca dan mengandung banyak pengulangan, redundan sehingga membutuhkan memori besar. Sehingga, biasanya ada format lain yang digunakan, misalnya JSON</p>
+<h2 id='operabilitas-syntatic-melalui-standardisasi'>Operabilitas Syntatic melalui Standardisasi</h2>
+<p>interoperability: Kemampuan suatu sistem komputer atau perangkat lunak untuk bertukar dan menggunakan informasi.</p>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+A[SIAK] --&gt; B[Sistem Keuangan];
+B --&gt; A;
+</code></pre>
+<p>Di pertukaran itu, ada standar dan formatnya untuk berkomunikasi. Jika mereka bsia mengkomunikasikan data, kita sebut itu interoperable. Melalui standardisasi, misalnya W3C, ISO, atau yang lainnya, suatu struktur bisa digunakan untuk interopability.</p>
+<figure><table>
+<thead>
+<tr><th>Jenis</th><th>Aplikasi</th></tr></thead>
+<tbody><tr><td>System</td><td>API, Protokol akses</td></tr><tr><td>Syntax</td><td>Data Format</td></tr><tr><td>Structure</td><td>Relational, Tree Structure, Skema</td></tr><tr><td>Semantic</td><td>Makna atau artinya</td></tr></tbody>
+</table></figure>
+<pre><code class='language-xml' lang='xml'>&lt;artifact&gt;
+  &lt;id&gt;GC:A23098&lt;/id&gt;
+  &lt;target&gt;cup&lt;/target&gt;
+  &lt;material&gt;gold&lt;/material&gt;
+  &lt;creationLocation&gt;Bali&lt;/creationLocation&gt;
+  &lt;originalOwner&gt;Puri Klungkung&lt;/originalOwner&gt;
+&lt;/artifact&gt;
+</code></pre>
+<p>Metadata saja tidak bisa mencari/menquery:</p>
+<ul>
+<li>Mencari semua vessels? (Tidak tau apakah <code>cup</code> itu vessel atau bukan)</li>
+<li>Mencari sebuah produk logam? (Tidak tau apakah <code>gold</code> itu logam atau bukan)</li>
+<li>Mencari semua artifak yang dibuat di Asia Tenggara (Tidak tau apakah <code>Bali</code> itu bagian dari Asia Tenggara atau bukan)</li>
+
+</ul>
+<p><img src="assets/image-20220901083428053.png" referrerpolicy="no-referrer" alt="image-20220901083428053"></p>
+<h2 id='the-resource-description-framework-rdf'>The Resource Description Framework (RDF) </h2>
+<pre><code class='language-turtle' lang='turtle'>GC-A23098
+  rdfs:label “Cup” ;
+  :object object:cup ;
+  :material material:gold ;
+  :creationLocation place:Bali ;
+  :originalOwner actor:PuriKlungkung .
+
+object:cup rdfs:subClassOf object:vessel .
+place:Bali loc:partof place:Indonesia .
+place:Indonesia loc:partOf place:SouthEastAsia .
+</code></pre>
+<h2 id='semantic-web'>Semantic Web</h2>
+<ul>
+<li><p>Sudut pandang konten: Lapisan metadata baru pada web yang mendeskripsikan konten dengan istilah kosa katanya dibagikan.</p>
+<ul>
+<li>Web menjadi sebuah sistem basis data global</li>
+<li>Jejaring data</li>
+
+</ul>
+</li>
+<li><p>Sudut pandang aplikasi: Web yang dimengerti oleh mesin</p>
+<ul>
+<li>Makna atau semantik dari suatu konten yang dapat diakses oleh mesin</li>
+<li>Layanan web yang pintar</li>
+<li>Interoperabilitas dari makna tersebut oleh berbagai sistem komputer</li>
+
+</ul>
+</li>
+<li><p>Sudut pandang teknologi: sebagai sebuah lapisan di atas XML.</p>
+</li>
+
+</ul>
+<p>Contoh knowledge graph: Wikidata</p>
+<h1 id='graph-based-data-models'>Graph Based Data models</h1>
+<p>Sebenarnya saat kita ingin mencari suatu informasi, kita sebenarnya mencari suatu entitas, mencari suatu &quot;thing&quot;, instead of &quot;string&quot; doang. Di sini lah <em>knwoledge graph</em> dapat digunakan. Google mencetuskan sebuah knowledge graph. Setiap entitas atau thing bisa menjadi sebuah informasi yang berhubungan dengan entitas entitas lain. </p>
+<p><a href='https://blog.google/products/search/introducing-knowledge-graph-things-not/' target='_blank' class='url'>https://blog.google/products/search/introducing-knowledge-graph-things-not/</a></p>
+<h2 id='knowledge-graph'>Knowledge Graph</h2>
+<p>Knowledge graph sudah digunakan sejak 1973, karena definisinya banyak dan kadang dia bisa conflicting. Sebuah knowledge graph adalah graph data yang digunakan untuk mengumpulkan informasi dan pengetahuan di dunia nyata. Dengan node merepresentasikan objek dan edgenya merepresentasikan hubungan antara setiap entitas.</p>
+<ul>
+<li>Data graph itu data model yang berbentuk graph</li>
+<li>Knowledge mengarah kepada sesuatu yang kita sudah ketahui.</li>
+
+</ul>
+<p>Knowledge pada KG (Knowledge Graph)</p>
+<ul>
+<li><p>Simple Statements</p>
+<ul>
+<li><pre><code class='language-mermaid' lang='mermaid'>graph LR;
+Jakarta(Jakarta)--&gt;|Ibukota|Indonesia(Indonesia)
+</code></pre>
+</li>
+
+</ul>
+</li>
+<li><p>Quantifed Statements </p>
+<ul>
+<li>Setiap ibukota adalah sebuah kota, kita tidak mungkin membuat edge. untuk semuanya, karena ini tuh itungannya lebih ke ontologi atau aturan. Lebih ekspresif sekadar dibikin node</li>
+
+</ul>
+</li>
+
+</ul>
+<p>Untuk mendapatkan lebih banyak informasi, kita bisa menyimpulakn dengan metode deduktif atau induktif</p>
+<ul>
+<li>Kita bisa menyimpulkan bahwa Jakarta itu adalah sebuah kota yang benar juga.</li>
+
+</ul>
+<h3 id='diversity-and-knowledge'>Diversity and Knowledge</h3>
+<p>Strukturnya bisa benar benar beragam, kita bisa gunakan</p>
+<ul>
+<li>Skema: Struktur yang lebih high level untuk knowledge graph</li>
+<li>Identity: Primary key, semacam pemetaan ke entitas dunia nyata yang asli</li>
+<li>Konteks: Menandakan konteks tertentu</li>
+
+</ul>
+<p>Buat KG, kita bisa ekstrasi, penambahan informasi, pengecekan kualitas, pemolesan</p>
+<h3 id='practice'>Practice</h3>
+<p>Pada praktisnya, ada yang open dan ada yang punya korporat knowledge graphnya. Misalnya ada yang:</p>
+<ul>
+<li>Gratis: DBPedia, Freebase, Wikidata, BBC KG (Buat berita), dan masih banyak buat konteks lainnya</li>
+<li>Enterprise: Google, Bing, Airbnb, Amazon, Facebook, LinkedIn</li>
+
+</ul>
+<p>Termasuk:</p>
+<ul>
+<li>Search, sistem rekomendasi, iklan, analitik bisnis</li>
+
+</ul>
+<h3 id='motivating-example'>Motivating Example</h3>
+<p>Database itu, misalnya bentuknya</p>
+<pre><code>Event(name, venue, type, start, end)
+</code></pre>
+<p>Secara intuitif, bisa kita modelkan menjadi banyak multiplicities, yang bisa menjadi binary relation yang banyak, dan ujung-ujungnya bisa kita modelkan dalam bentuk graph, itulah yang mendasari keterbergunaan knowledge graph, suatu bentuk basis data dalam bentuk graph.</p>
+<p>&nbsp;</p>
+</body>
+</html>

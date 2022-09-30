@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>03</title>
+</head>
+<body><h3 id='2022-sep-6th'>2022 Sep 6<sup>th</sup></h3>
+<p>Semua instansi relasi biner itu intuitifnya langsung bisa dimodelkan ke graf, tapi masalahnya kenapa kita tidak modelkan ke graph langsung?</p>
+<h4 id='directed-edge-labeled-graph'>Directed-Edge-Labeled-Graph</h4>
+<p>Pada graph kita bisa langsung modelkan datanya, tapi menambahkan informasi ke graph itu akan lebih challenging. Pada model data graph, kalau misakan ada kolom yang kosong atau <code>NULL</code> itu nanti di graph ga ada panahnya, dan pas mau query itu, jawabannya bukan ya/tidak, tapi informasinya tidak diketahui, bukan tidak ada.</p>
+<p>Intinya definisinya itu terdiri dari himpunan verteks \(V\), ada himpunan label \(L\), dan edges \(E\) yang merupakan himpunan yang isinya pasangan berurut yang merupakan subhimpunan dari \(V \times L \times V\).</p>
+<p>Kalau misalkan kita memiliki dua buah DELG, dan ingin digabungkan kita bisa lakukan operasi union kepada setiap himpunannya.</p>
+<p><img src="assets/image-20220906084045791.png" referrerpolicy="no-referrer" alt="image-20220906084045791"></p>
+<h4 id='heterogeneous-graph'>Heterogeneous Graph</h4>
+<p>Pada heterogenous graph, ada tambahan \(\ell\) yang merupakan \(V \rightarrow L\) yang memetakan setiap verteks ke label \(L\)</p>
+<p><img src="assets/image-20220906084555884.png" referrerpolicy="no-referrer" alt="image-20220906084555884"></p>
+<p>Sebuah edge pada graf ini disebut homogen bila dia berada di antara dua node yang tipe atau labelnya sama. Selain itu, disebut heterogen, misalnya antara chile dan peru itu homogen, dan capital itu heterogen. Graf ini berguna untuk mempartisi node berdasarkan tipenya, berguna untuk machine learning task tertentu. Beda dengan DELG, graph ini hanya mendukung relasi many-to-one antara node dengan tipenya, (setiap node diasosiasikan dengan satu tipe aja ga bisa lebih, atau kaya interface)</p>
+<h4 id='property-graph'>Property Graph</h4>
+<ul>
+<li>Property graph biasanya digunakan pada database graph, misalnya pada Neo4j</li>
+<li>Property graph juga bisa diconvert dari dan ke DELG</li>
+<li>DELG menawarkan model yang lebih minimal, sementara property graph menawarkan yang lebih flexibel.</li>
+<li>Sebenarnya dari banyaknya model, itu kita tergantung dari banyak faktor juga misalnya ketersediaan implementasi dari berbagai model berbeda.</li>
+
+</ul>
+<h4 id='pertanyaan'>Pertanyaan</h4>
+<ul>
+<li><p>Pada Property Graph:</p>
+<ul>
+<li>Apakah boleh ada repeated keys? <strong>Boleh</strong>, bukan keys istilahnya, tapi property</li>
+<li>Apakah setiap Heterogenous graph dan DELG sebenarnya juga merupakan property graph? Jika tidak, seberapa jauh harus kita normalisasi atau minimize sebuah graph hingga dapat disebut sebagai property graph? <strong>Sesingkatnya saja, buatnya tergantung kebutuhan. Pada property graph, node dan edge bisa memiliki property value pair, jadi itu bisa dimanfaatkan</strong> </li>
+<li>Apakah setiap node harus memiliki properti? <strong>Tidak mesti</strong></li>
+
+</ul>
+</li>
+<li><p>Pada DELG, Property, dan Heterogenous</p>
+<ul>
+<li>Apakah boleh ada double edge yang directionnya sama? <strong>Boleh</strong></li>
+
+</ul>
+</li>
+
+</ul>
+<h4 id='rdf-and-the-issue-of-identity'>RDF and The Issue of Identity</h4>
+<p>Menggunakan node yang ambiguous node bisa menyebabkan penamaan yang bertabrakan. Kita harus menggunakan sebuah identifier yang panjang umur, ada terus selamanya dan ga berubah, dan secara global itu bersifat unik.</p>
+<p><img src="assets/image-20220908090622849.png" referrerpolicy="no-referrer" alt="image-20220908090622849"></p>
+<ul>
+<li>Misalnya ada untuk paper yang namanya DOI (Digital Object Identifiers (DOIs))</li>
+
+</ul>
+<ul>
+<li>ORCID IDs for researchers</li>
+<li>ISBNs (International Standard Book Numbers) for books.</li>
+<li>Web itu ada yang namanya URL (Uniform Resource Locator) untuk membedakan benda atau resource yang berada di suatu lokasi.</li>
+
+</ul>
+<p>Misalkan kita pengen bikin Santiago di chile itu ditemukan oleh Pedro de Valdivia</p>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+Santiago(Santiago) --&gt;|founded| Pedro(Pedro de Valdivia)
+</code></pre>
+<p>Kalau kita menggunakan URL:</p>
+<ul>
+<li>URL untuk Santiago di Chile di Wikidata
+<a href='https://www.wikidata.org/wiki/Q2887' target='_blank' class='url'>https://www.wikidata.org/wiki/Q2887</a></li>
+<li>URL buat Pedro de Valdivia:
+<a href='https://www.wikidata.org/wiki/Q203534' target='_blank' class='url'>https://www.wikidata.org/wiki/Q203534</a></li>
+<li>URL buat relasi ‘founded by’ di Wikidata:
+<a href='https://www.wikidata.org/wiki/Property:P112' target='_blank' class='url'>https://www.wikidata.org/wiki/Property:P112</a></li>
+
+</ul>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+Santiago(https://www.wikidata.org/wiki/Q2887) --&gt;|https://www.wikidata.org/wiki/Property:P112| Pedro(https://www.wikidata.org/wiki/Q203534)
+</code></pre>
+<p>Tapi ini tidak cukup, apakah Pedro yang menemukan kota Santiago atau yang menemukan URL nya.</p>
+<ul>
+<li>Tapi di sini kita extend ideanya URL untuk menggunakan Internationalized Resource Identifier (IRI) — dulunya namanya Uniform Resource Identifier (URI).</li>
+<li>Dia merupakan identifier, tapi juga merupakan lokasi di web.</li>
+
+</ul>
+<ul>
+<li>Setiap URL itu IRI, karena setiap URL itu identifier ke dokumen di web.</li>
+
+</ul>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+Santiago(https://www.wikidata.org/entity/Q2887) --&gt;|https://www.wikidata.org/prop/direct/P112| Pedro(https://www.wikidata.org/entity/Q203534)
+</code></pre>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+Santiago(wd:Q2887) --&gt;|wdt:P112| Pedro(wd:Q203534)
+</code></pre>
+<h4 id='konvensi'>Konvensi</h4>
+<pre><code>IRI ::= scheme:[//authority]path[?query][#fragment]
+</code></pre>
+<ul>
+<li><p>Scheme: <code>http, https, ftp, mailto, urn</code></p>
+<ul>
+<li>Case insensitive</li>
+
+</ul>
+</li>
+<li><p>Authority: <code>kgbook.org, john@example.com, example.org:8080</code></p>
+<ul>
+<li>Case insensitive</li>
+
+</ul>
+</li>
+
+</ul>
+<ul>
+<li><p>Path: <code>/etc/passwd, this/path/with/-:_ /is/../okay</code></p>
+<ul>
+<li>Case sensitive</li>
+<li>May be empty</li>
+
+</ul>
+</li>
+<li><p>Query: <code>q=Semantic+Web+book</code></p>
+<ul>
+<li>Case sensitive</li>
+<li>May be empty</li>
+
+</ul>
+</li>
+<li><p>Fragment: <code>#section1</code></p>
+<ul>
+<li>Case sensitive</li>
+<li>May be empty</li>
+
+</ul>
+</li>
+
+</ul>
+<p>Kita prefer menggunakan <code>https</code> atau <code>http</code> karena sebenarnya udah kebind sama web protocol. IRI itu harus persistent, harus tetap hidup dan menunjuk ke resource yagng sama selamanya. Bagian querynya mesti kosong. </p>
+<ul>
+<li>IRI itu globally unique, hostnamenya merujuk ke suatu data owner tertentu.</li>
+<li>Uniquenessnya dipastikan oleh data owner</li>
+<li>Jadi dia globally unique.</li>
+
+</ul>
+<h4 id='datatype'>Datatype</h4>
+<p>Datetime pada knowledge graph bisa kita jadikan datatype, karena bisa diparse oleh mesin dan kita anggap sebagai literal dengan datatype. Misal untuk datetime, <code>“2018-03-22T12:00:00”^^xsd:dateTime</code>. Kalau di RDF, node yang gini ga boleh ada edge ke luar. Ada pula <code>xsd:string</code>, <code>xsd:decimal</code></p>
+<h4 id='rdf'>RDF</h4>
+<p>RDF triple itu dinyatakan dalam bentuk \((s, p, o)\).</p>
+<ul>
+<li>\(s\), subject, bsia IRI atau blank node.</li>
+<li>\(p\), mesti IRI</li>
+<li>\(o\), bisa iri, blank, atau literal.</li>
+
+</ul>
+<p>Kalau RDF graph itu himpunan triple. Dari DELG, kita tinggal menentukan node mana ayng literal dan tipenya apa, terus sisanya bisa kita IRI dan jadikan dia object entitas sendiri.</p>
+<p>&nbsp;</p>
+</body>
+</html>

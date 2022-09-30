@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>04</title>
+</head>
+<body><h3 id='n-triple-format'>N-Triple Format</h3>
+<ul>
+<li>Setiap triple dinyatakan satu satu untuk setiap barisnya</li>
+<li>Setiap triple diakhiri dengan titik.</li>
+<li>IRI dan datatypenya ditulis secara lengkap dan tidak ada abbreviation</li>
+<li>Unicode charactersnya ditulis pakai escape sequence</li>
+<li>Ekstensinya <code>.nt</code></li>
+
+</ul>
+<p>Buat IRI biasanya, namespacenya dibuat serupa, namun untuk setiap relasi, tipe dan entitas dibuat pattern IRInya berbeda.</p>
+<p>Ada N-Triples:</p>
+<pre><code class='language-turtle' lang='turtle'>&lt;http://example.org/data/Vi\u00F1adelMar&gt; &lt;http://example.org/vocab#bus&gt;
+&lt;http://example.org/data/Arica&gt; .
+&lt;http://example.org/data/EID15&gt; &lt;http://example.org/vocab#venue&gt;
+&lt;http://example.org/data/SantaLuc\u00EDa&gt; .
+&lt;http://example.org/data/SantaLuc\u00EDa&gt; &lt;http://example.org/vocab#city&gt;
+&lt;http://example.org/data/Santiago&gt; .
+</code></pre>
+<h3 id='turtle-format'>Turtle Format</h3>
+<ul>
+<li>Triple dan triple group diakhiri dengan titik</li>
+<li>Subjectnya sama bisa dishare dan dipisah dengan titik koma</li>
+<li>Subject dan predikat sama bisa dipisah dengan koma</li>
+<li>Namespace prefix bisa digunakan, didefinisikan dengan syntax prefix</li>
+<li>Karakter unicode tidak perlu diescape</li>
+<li>Ekstensinya <code>.ttl</code>,</li>
+<li>Konversi online tools nya banyak  <a href='https://issemantic.net/rdf-converter' target='_blank' class='url'>https://issemantic.net/rdf-converter</a> (ada visualizer RDF nya juga) or <a href='https://www.easyrdf.org/converter' target='_blank' class='url'>https://www.easyrdf.org/converter</a>. Library seperti Jena juga bisa digunakan untuk baca format ini</li>
+
+</ul>
+<pre><code class='language-turtle' lang='turtle'>@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix ex: &lt;http://example.org/data/&gt; .
+@prefix exv: &lt;http://example.org/vocab#&gt; .
+
+ex:EID15 rdf:type ex:OpenMarket, ex:FoodFestival, ex:DrinksFestival ;
+exv:name &quot;Ñam&quot; ;
+exv:start &quot;2018-03-22T12:00:00&quot;^^xsd:dateTime ;
+exv:end &quot;2018-03-29T20:00:00&quot;^^xsd:dateTime ;
+exv:venue ex:SantaLucia .
+
+ex:SantaLucia exv:city ex:Santiago .
+ex:EID16 rdf:type ex:OpenMarket, ex:FoodFestival ;
+exv:name &quot;Food Truck&quot;^^xsd:string ;
+exv:venue ex:Sotomayor, ex:PiscinaOlimpica .
+</code></pre>
+<h4 id='blank-node'>Blank Node</h4>
+<p>Merupakan sebuah existential node, atau anonymous node, blank node bukan literal dan sifatnya seperti entity, tapi tidak diberi identifier atau IRI. Gunanya digunakan untuk sesuatu yang belum diketahui, tapi masih ada hubungan ketergunaan.</p>
+<p>Misal, ada dua event <code>chile:EID42</code> dan <code>chile:EID43</code> yang venuenya sama namun venuenya belum ditentukan. Alternatif solusi:</p>
+<ul>
+<li><p>Edge venue ga usah dibuat</p>
+<ul>
+<li>Nanti Informasi bahwa kedua venuenya sama ga diketahui</li>
+
+</ul>
+</li>
+<li><p>Buat IRI baru yang merepresentasikan ventu</p>
+<ul>
+<li>Tidak bisa dibedakan secara semantik dengan venue yang sudah diketahui</li>
+
+</ul>
+</li>
+<li><p>Gunakan blank node</p>
+</li>
+
+</ul>
+<pre><code class='language-turtle' lang='turtle'>chile:EID42 chile:venue _:b1.
+chile:EID43 chile:venue _:b2.
+</code></pre>
+<p>Kalau untuk kasus lain misal ada dua event yang diselenggarakan di GBK dan JIS:</p>
+<pre><code class='language-turtle' lang='turtle'>[] ex:venue ex:GBK, ex:JIS.
+</code></pre>
+<pre><code class='language-turtle' lang='turtle'>[ ex:venue ex:GBK, ex:JIS ].
+</code></pre>
+<p>Apa bedanya indentifier dan IRI, scopenya berbeda, untuk IRI berlaku global, sementara blank node hanya berlaku pada satu dokumen RDF saja.</p>
+<p>Di DELG juga bisa ada blank node.</p>
+<h5 id='many-value-representation-with-blank-nodes'>Many-Value Representation with Blank Nodes</h5>
+<pre><code class='language-turtle' lang='turtle'>@prefix ex: &lt;http://example.org/&gt; .
+ex:Chutney ex:hasIngredient _:b1, _:b2 .
+_:b1 ex:ingredient ex:greenMango; ex:amount &quot;1 lb.&quot; .
+_:b2 ex:ingredient ex:CayennePaper; ex:amount &quot;1 tsp.&quot; .
+</code></pre>
+<h5 id='rdf-lists'>RDF Lists</h5>
+<pre><code class='language-turtle' lang='turtle'>chile:Chile chile:peaks
+(chile:OjosDelSalado chile:NevadoTresCruces chile:Llullailaco) .
+</code></pre>
+<p>Serupa dengan </p>
+<pre><code class='language-turtle' lang='turtle'>chile:Chile chile:peaks _:b1.
+_:b1 rdf:first chile:OjosDelSalado; rdf:rest _:b2.
+_:b2 rdf:first chile:NevadoTresCruces; rdf:rest _:b3.
+_:b3 rdf:first chile:Llullailaco; rdf:rest rdf:nil.
+</code></pre>
+<h4 id='lexicalization'>Lexicalization</h4>
+<p>IRI bisa dibuat dalam bentuk yang dapat dimengerti oleh manusia, misalnya <code>chile:Santiago</code>. Tapi identifiernya sebenarnya tidak ada signifikan arti atau semanticnya, jadi boleh aja menggunakan string acak sebagai identifier, asal tidak ambiguous.</p>
+<p>Contoh: di Wikidata, identifier Eswatini adalah wd:Q1050</p>
+<ul>
+<li>Tidak perlu memilih IRI berdasarkan bahasa: <code>wd:Eswatini</code> (English), <code>wd:eSwatini</code> (Swahili), or <code>wd:Esuatini</code> (Spanish).</li>
+
+</ul>
+<p>Tapi kita bisa memberikan label jika ingin membuat dia lebih readable</p>
+<pre><code class='language-turtle' lang='turtle'>wd:Q1050 rdfs:label &quot;Swatini&quot;
+wd:Q1050 rdfs:label &quot;Swatini&quot;@en
+wd:Q1050 rdfs:label &quot;eSwatini&quot;@sw
+wd:Q1050 rdfs:label &quot;Suatini&quot;@es
+</code></pre>
+<p>Bisa juga tambahin informasi linguistik lain <code>skos:altLabel</code> untuk alias dan komentar <code>rdfs:comment</code></p>
+<p>Gunanya buat apa?</p>
+<ul>
+<li>Membantu pengguna mengidentifikasi entitas dunia nyata dari suatu node pada knowledge graph yang dimaksud.</li>
+<li>Membolehkan referensi silang buat teks agar lebih mudah mencari detailnya tentang suatu entitas.</li>
+<li>Bisa membantu antarmuka tampilan datanya.</li>
+
+</ul>
+<h3 id='rdf-architecture'>RDF Architecture</h3>
+<p>Sumber-sumbernya banyak:</p>
+<ul>
+<li>Datanya dibuat secara manual</li>
+<li>Dari dokumen RDF lain, tapi ini butuh parser sama serializer.</li>
+<li>Dari spreadsheet, halaman web, dibutuhkan scraper dan converterny.</li>
+<li>Database relasional kita butuh wrapper untuk database dari model relationalnya ke rdf.</li>
+
+</ul>
+<p>Cara dapetinnya:</p>
+<ul>
+<li><p>Mencari dan memproses dari text, tapi bisa susah,</p>
+</li>
+<li><p>Cara yang lebih baik adalah dengan mengquery, terutama jika RDFnya distore pada basis data yang relasional, sehingga dibutuhkan mesin untuk menyimpan dan mengquery mesin.</p>
+<ul>
+<li>Kita bisa tambahin mesin yang ada reasoningnya, untuk menambahkan makna atau semantik yang lebih dalam.</li>
+
+</ul>
+</li>
+
+</ul>
+<p><a href='https://blazegraph.com/' target='_blank' class='url'>https://blazegraph.com/</a></p>
+<p><img src="assets/image-20220915085647687.png" referrerpolicy="no-referrer" alt="image-20220915085647687"></p>
+<ul>
+<li>RDF parsers: Buat baca RDF</li>
+<li>RDF serializers: Buat nulis ke memori</li>
+
+</ul>
+<p>Biasanya di satu library sudah include keduanya dan bisa diserialisasi ke berbagai macam format, dari n-triples, turtle, json-ld, dan urutannya bisa berbeda, serta blank node IDnya tapi merepresentasikan graf yang sama. Aplikasinya bisa pakai Apache Jena, Apache any23, rdflib, Eclipse rdf4j, JsonLD, dkk.</p>
+<p>RDF store itu suatu basis data yang menyimpan data RDF, beberapa ada yang merupakan ekstensi dari RDBMS biasa, dibikin jadi semacam triple table, edgesnya bisa dibuat binary relations, bisa juga ada property tables.</p>
+<p>Data pada RDF store bisa diakses dengan yang namanya SPARQL query, nanti akan diproses oleh query engine, setiap RDF store ada query enginenya, querynya dijalankan ga dari file RDF nya tapi di basis datanya, ada pula protokolnya untuk komunikasi query dan hasilnya.</p>
+<p>Ada pula reasoning engines, yang bisa memproses inferensi logika dari data-datanya, termasuk dari kata kerja (edge, verb) dan dua objek (node) nya. Istilah data federation ini: penyatuan data ini biasanya untuk setiap triple disimpan dalam satu penyimpanan. Gunanya agar querynya lebih mudah.</p>
+<p>Salah satu contoh dari RDF ini ialah pada schema.org. Jika kita buat menggunakan schema.org, bisa meningkatkan expose dari SEO ke website kita.</p>
+<h3 id='basic-graph-pattern'>Basic Graph Pattern</h3>
+<p>RDF itu pada dasarnya merupakan graf, dan query itu kita bisa nyatakan dalam sebuah pattern atau pola yang bentuknya serupa (homomorphism) dengan yang ada di graph. Kita lakukan matching query terhadap graph.</p>
+<p><img src="assets/image-20220915090734461.png" referrerpolicy="no-referrer" alt="image-20220915090734461"></p>
+<p>Pada dasarnya untuk query itu ialah kita bikin pola untuk diquery ke graph, seperti yang contoh di slide, itu bila kita ingin query food festival, venuenya di mana saja.</p>
+<p>Homorphism Query:</p>
+<figure><table>
+<thead>
+<tr><th>?ev</th><th>?vn1</th><th>?vn2</th></tr></thead>
+<tbody><tr><td>EID16</td><td>Piscina Olímpica</td><td>Sotomayor</td></tr><tr><td>EID16</td><td>Sotomayor</td><td>Piscina Olímpica</td></tr><tr><td>EID16</td><td>Piscina Olímpica</td><td>Piscina Olímpica</td></tr><tr><td>EID16</td><td>Sotomayor</td><td>Sotomayor</td></tr><tr><td>EID15</td><td>Santa Lucía</td><td>Santa Lucía</td></tr></tbody>
+</table></figure>
+<p>Isomorphism Query: Hanya dapat yang pertama dan kedua.</p>
+<p>Intinya: untuk setiap connected subgraph, dimatching bentuknya apakah sama dengan query.</p>
+<ul>
+<li>Isomorphism, dia bakal mapping untuk setiap vertex secara bijektif (kodomain sama dengan range).</li>
+<li>Homomorphism, mappingnya tidak harus bijektif.</li>
+<li>Epimorphism: surjective doang</li>
+<li>Monomorphism: injective doang</li>
+
+</ul>
+<p>Setelah dimap, cek apakah edges hasil map needlenya sama dengan graph haystack. Untuk semua sifat fungsi:</p>
+<ul>
+<li>Injective (One-to-one): Boleh menjomblo, tidak boleh poligami</li>
+<li>Surjective (onto): Tidak boleh menjomblo, boleh poligami</li>
+<li>Bijektif (One to one and onto): Tidak boleh menjomblo, tidak boleh poligami</li>
+
+</ul>
+<p>Perhatikan bahwa dalam query ini ada beberapa node yang mesti dimap ke node spesifik tertentu sehingga querynya lebih sempit. Untuk SPARQL, kita pakainya homomorphism.</p>
+<pre><code class='language-sparql' lang='sparql'>select ?ev ?vn1 ?vn2
+where {
+	?ev rdf:type ex:FoodFestival ;
+			exv:venue ?vn1, ?vn2 .
+}
+</code></pre>
+<p>SPARQL (SPARQL Protocol and RDF Query Language)</p>
+</body>
+</html>

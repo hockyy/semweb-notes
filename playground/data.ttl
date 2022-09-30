@@ -1,0 +1,31 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ex: <http://example.org/> .
+@prefix exv: <http://example.org/vocab#> .
+
+ex:EID13 rdf:type exv:TheatreFestival, exv:MusicFestival ;
+  exv:name "Santiago a Mil" ;
+  exv:venue ex:PlazadelaConstitución ;
+  exv:start "2023-01-09T09:00:00"^^xsd:dateTime .
+ex:EID14 rdf:type exv:MusicFestival ;
+  exv:name "Festival de Viña" ;
+  exv:venue ex:QuintaVergara .
+ex:EID15 rdf:type exv:OpenMarket, exv:FoodFestival, exv:DrinksFestival ;
+  exv:name "Ñam" ;
+  exv:venue ex:SantaLucía ;
+  exv:start "2018-03-22T12:00:00"^^xsd:dateTime ;
+  exv:end "2018-03-29T20:00:00"^^xsd:dateTime .
+ex:EID16 rdf:type exv:OpenMarket, exv:FoodFestival ;
+  exv:name "Food Truck"^^xsd:string ;
+  exv:venue ex:Sotomayor, ex:PiscinaOlímpica .
+ex:SantaLucía exv:city ex:Santiago .
+ex:Sotomayor exv:city ex:ViñadelMar .
+ex:PiscinaOlímpica exv:city ex:Arica .
+ex:QuintaVergara exv:city ex:ViñadelMar .
+ex:PlazadelaConstitución exv:city ex:Santiago .
+ex:Santiago exv:bus ex:ViñadelMar ;
+  exv:flight ex:ViñadelMar, ex:Arica .
+ex:ViñadelMar exv:bus ex:Arica, ex:Santiago ;
+  exv:flight ex:Santiago .
+ex:Arica exv:bus ex:ViñadelMar ;
+  exv:flight ex:Santiago .

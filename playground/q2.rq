@@ -1,0 +1,19 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX exv: <http://example.org/vocab#>
+PREFIX ex: <http://example.org/>
+
+
+SELECT ?foodfest ?musicfest WHERE {
+  {
+    ?foodfest rdf:type exv:FoodFestival ;
+      exv:venue [ exv:city ex:Santiago ] .
+  } UNION {
+    ?musicfest rdf:type exv:MusicFestival ;
+      exv:venue ?ven .
+    {
+      ?ven exv:city ex:Santiago
+    } UNION {
+      ?ven exv:city ex:ViñadelMar
+    }
+  }
+}

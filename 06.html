@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>06</title>
+</head>
+<body><h4 id='filter-and-other-expressions'>Filter and other expressions</h4>
+<p>Dengan pattern yang kompleks, masih ada beberapa query yang agak sulit untuk diraih, filter akan menyaring solution mapping dengan mengecek kondisi tertentunya.</p>
+<pre><code class='language-sparql' lang='sparql'>SELECT ?book
+WHERE {
+	?book ex:publishedBy &lt;http://springer.com&gt; .
+  ?book ex:price ?price FILTER (?price &lt; 35) .
+}
+</code></pre>
+<p><a href='https://en.wikibooks.org/wiki/SPARQL/Expressions_and_Functions' target='_blank' class='url'>https://en.wikibooks.org/wiki/SPARQL/Expressions_and_Functions</a></p>
+<h4 id='filter-scope'>Filter scope</h4>
+<p>Filter berlaku pada solution mapping dalam bloknya yang dibatasi oleh kurung kurawal untuk blok tersebut.</p>
+<pre><code class='language-sparql' lang='sparql'>{
+  ?x foaf:name ?name .
+  FILTER regex(?name, &quot;Smith&quot;) .
+}
+
+{
+  FILTER regex(?name, &quot;Smith&quot;) .
+  ?x foaf:name ?name .
+}
+</code></pre>
+<p>Kedua query di atas itu sama hasilnya.</p>
+<p>Filter exists</p>
+<pre><code class='language-sparql' lang='sparql'>SELECT ?person WHERE {
+   ?person rdf:type foaf:Person.
+   FILTER EXISTS {
+   		?person foaf:name ?name
+   }
+}
+</code></pre>
+<p>Minus difference bakal ngelakuin $A \and \neg B$</p>
+<pre><code class='language-sparql' lang='sparql'>SELECT DISTINCT ?s WHERE {
+	?s ?p ?o .
+	MINUS {
+		?s foaf:givenName &quot;Bob&quot; .
+	}
+}
+</code></pre>
+<p>Bisa juga melakukan order by, limit, offset, dan distinct serupa dengan SQL.</p>
+<h4 id='values'>Values</h4>
+<p>Kita bisa menggunakan values untuk mengenumerasi tuple pasangan value dan diassign ke variable masing-masing.</p>
+<h3 id='aggregates'>Aggregates</h3>
+<p>Cara kerjanya mirip dengan di sequel, misalkan kita udah punya suatu projection, kit abisa lakukan group by, dan kemudian ada fungsi agregat yang bisa kita terapkan.</p>
+<ul>
+<li><p>SUM(?X)</p>
+</li>
+<li><p>AVG(?X)</p>
+</li>
+<li><p>MIN(?X)</p>
+</li>
+<li><p>MAX(?X)</p>
+</li>
+<li><p>GROUP_CONCAT(?X ; separator=&quot;|&quot;)</p>
+<ul>
+<li>Ini buat menggabungkan string</li>
+
+</ul>
+</li>
+<li><p>SAMPLE(?X)</p>
+<ul>
+<li>Pilih satu secara acak.</li>
+
+</ul>
+</li>
+
+</ul>
+<h3 id='subqueries'>Subqueries</h3>
+<p>Subqueries agak tricky, karena di dalam select sebenarnya bisa ada select lagi, tapi scopenya itu ga kebawa, jadi setiap kali ada kurung kurawal baru, dia bakal bikin scope baru.</p>
+<h3 id='property-paths'>Property Paths</h3>
+<p>Mirip sama regular expression, tapi intinya predikat atau property itu bisa dimodif:</p>
+<ol start='' >
+<li><p>IRI</p>
+<ul>
+<li>normal yang sering kita lakukan</li>
+
+</ul>
+</li>
+<li><p>^path</p>
+<ul>
+<li>invers atau kebalikan dari suatu path, tuker arahnya</li>
+
+</ul>
+</li>
+<li><p>path1 / path2 </p>
+<ul>
+<li><p>Konkatenasi dari suatu path diikuti dengan path lain, ini sebenarnya bisa disingkat menggunakan blank nodes</p>
+</li>
+<li><pre><code class='language-sparql' lang='sparql'>{
+  ?x foaf:mbox &lt;mailto:alice@example&gt; .
+  ?x foaf:knows/foaf:knows/foaf:name ?name .
+}
+</code></pre>
+</li>
+<li><pre><code class='language-sparql' lang='sparql'>{
+  ?x foaf:mbox &lt;mailto:alice@example&gt; .
+  ?x foaf:knows [ foaf:knows [ foaf:name ?name ] ].
+}
+</code></pre>
+</li>
+
+</ul>
+</li>
+<li><p>path1 | path2</p>
+<ul>
+<li>antara path1 atau path2, </li>
+
+</ul>
+</li>
+<li><p>path* </p>
+<ul>
+<li>0 atau lebih langkah untuk path ini</li>
+
+</ul>
+</li>
+<li><p>path+</p>
+<ul>
+<li>1 atau lebih langkah.</li>
+
+</ul>
+</li>
+<li><p>path?</p>
+<ul>
+<li>0 atau 1 langkah</li>
+
+</ul>
+</li>
+<li><p>!(iri<sub>1</sub>|...|iri<sub>n</sub>)</p>
+<ul>
+<li>Kecuali iri<sub>1</sub>, .. iri<sub>n</sub></li>
+
+</ul>
+</li>
+<li><p>!(^iri1|...|^irin)</p>
+<ul>
+<li>an IRI not one of reverse of iri1, ..., irin. Can be combined with the negated
+path expression in (8)</li>
+
+</ul>
+</li>
+<li><p>(path)</p>
+<ul>
+<li>Grouping untuk presedensi</li>
+
+</ul>
+</li>
+
+</ol>
+<h4 id='contoh-kombinasi'>Contoh Kombinasi</h4>
+<pre><code class='language-sparql' lang='sparql'>{
+  ?x foaf:knows/^foaf:knows ?y .
+  FILTER(?x != ?y)
+}
+</code></pre>
+<p>sama dengan</p>
+<pre><code class='language-sparql' lang='sparql'>{
+  ?x foaf:knows ?gen1 .
+  ?y foaf:knows ?gen1 .
+  FILTER(?x != ?y)
+}
+</code></pre>
+<h4 id='output-forms'>Output Forms</h4>
+<ul>
+<li><p>SELECT</p>
+<ul>
+<li>mengembalikan barisan mapping solusi</li>
+<li>sederhana, tapi struktur dan hubungan antara objeknya hilang</li>
+
+</ul>
+</li>
+<li><p>CONSTRUCT</p>
+<ul>
+<li><p>Mengembalikan rdf graf lain yang sudah dispesifikasi,</p>
+</li>
+<li><pre><code class='language-sparql' lang='sparql'>PREFIX : &lt;http://domain.org/ns/&gt;
+
+CONSTRUCT {?album :date ?tanggal} WHERE {
+  ?album :date ?tanggal .
+	?album :date ?tanggal2 .
+  FILTER (?tanggal &lt; ?tanggal2)
+}
+ORDER BY ?tanggal
+</code></pre>
+</li>
+<li><p>Bila kita construct dengan blank node, akan di preserve, namun nama blanknodenya bisa beda, tapi strukturnya sama.</p>
+</li>
+
+</ul>
+</li>
+<li><p>ASK</p>
+<ul>
+<li>Mengembalikan boolean true atau false berdasarkan jumlah hasilnya, mirip dengan exists</li>
+
+</ul>
+</li>
+<li><p>DESCRIBE</p>
+<ul>
+<li>Mengembalikan RDF graph juga yang berhubungan dengan variabel yang ditanyakan</li>
+
+</ul>
+</li>
+
+</ul>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,13 @@
+PREFIX exv: <http://example.org/vocab#>
+PREFIX ex: <http://example.org/>
+
+SELECT ?name ?city WHERE {
+  ?event exv:venue ?ven ;
+    exv:name ?name .
+  {
+    ?ven exv:city ex:Santiago .
+  } UNION {
+    ?ven exv:city ex:Arica .
+  }
+  ?ven exv:city ?city
+}
