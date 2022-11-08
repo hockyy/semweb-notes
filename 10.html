@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>10</title>
+</head>
+<body><h4 id='ontologies'>Ontologies	</h4>
+<p><img src="assets/egg-egg-static.gif" referrerpolicy="no-referrer" alt="egg-egg-static"></p>
+<p>Terdapat 4 perspektif untuk ontology:</p>
+<ul>
+<li><p>Filosofis</p>
+<ul>
+<li><p>Studi yang memperlajari makna dari suatu benda, essence of being</p>
+</li>
+<li><p>Aristotle mengabstraksikan setiap benda itu menjadi 10 benda, (ibarat taksonomi)</p>
+</li>
+<li><p>Ontologi formal terdiri dari beberapa teori:</p>
+<ul>
+<li>Bagian dan keutuhan</li>
+<li>Teori waktu</li>
+<li>Fisika naif</li>
+
+</ul>
+</li>
+<li><p>Untuk berkomunikasi butuh semacam suatu model yang dapat dimengerti atau diinterpretasi setiap pihak</p>
+</li>
+
+</ul>
+</li>
+<li><p>Linguistic</p>
+<ul>
+<li><p>Makna kata</p>
+</li>
+<li><p>Kamus: Mendaftarkan dan mengindeks semua kata</p>
+</li>
+<li><p>Tesaurus: Menghubungkan konsep dan sinonim, antonim, kesamaan</p>
+<ul>
+<li>Berasal dari bahasa latin yang artinya treasure, treasury atau storehouse</li>
+
+</ul>
+</li>
+<li><p>Misalnya pada Roget&#39;s Thesaurus ada hubungan abstrak, space, matter, intellect, volition dan affections</p>
+</li>
+
+</ul>
+</li>
+<li><p>Istilah-istilah terminology</p>
+<ul>
+<li><p>Konsep analisis makna kata</p>
+</li>
+<li><p>ISO standard</p>
+</li>
+<li><p>Konsep dan term punya beberapa tingkatan atau kelas:</p>
+<ul>
+<li><p>Monosemy: Satu term - Konsepnya satu saja</p>
+</li>
+<li><p>Polysemy: Satu term, konsepnya banyak, misalnya kepala panah dan kepala manusia</p>
+</li>
+<li><p>Homonymy: Satu term, tapi konsepnya banyak namun tidak berelasi</p>
+<ul>
+<li>Bank untuk institusi, Bank untuk sungai, river bank</li>
+
+</ul>
+</li>
+<li><p>Synonymy: Satu konsep, istilahnya banyak</p>
+<ul>
+<li>Apartment, flat</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><p>Term punya definisi yang membatasi (delimiting) dan ada pula yang tidak membatasi</p>
+</li>
+<li><p>Ada istilah hyponymy yaitu konsep membagikan hubungan karakteristik umum</p>
+<ul>
+<li>Hierarki konsep ada super ada subordinatenya</li>
+<li>Misalnya car dengan vehicle</li>
+
+</ul>
+</li>
+<li><p>Ada istilah meronymy untuk hubungan partitive</p>
+<ul>
+<li>hubungan bagian dan seutuhnya</li>
+<li>Atom pada molekul, kaki kursi pada kursinya</li>
+<li>Tree dengan root dan branch</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><p>Ilmu Komputer</p>
+</li>
+
+</ul>
+<p>Terdapat dua standar semantic web untuk merepresenasikan ontologi, selain rdfs:</p>
+<ul>
+<li>Web Ontology Language OWL</li>
+<li>Simple Knowledge Organization System SKOS</li>
+
+</ul>
+<p>Ontologi digunakan untuk menspesifikasikan konsep konsep semantik</p>
+<p>Pada thesaurus, antar kata terhubung bisa dengan adanya beberapa variasi:</p>
+<ul>
+<li>BT Broader term</li>
+<li>NT Narrower term</li>
+<li>RT Related term</li>
+<li>USE “See”</li>
+<li>UF Used for; opposite of USE</li>
+<li>SN Scope note</li>
+
+</ul>
+<p><img src="assets/Graph-of-the-Generic-Thesaurus-Ontology.png" referrerpolicy="no-referrer" alt="Graph of the Generic Thesaurus Ontology. | Download Scientific Diagram"></p>
+<p><img src="assets/graph.jpg" alt="img" style="zoom: 25%;" /></p>
+<p>Perhatikan bahwa graf tesauri ini sebenarnya belum terlalu formal, dan saat kita ngeprosesnya bisa ada informasi yang hilang, misalnya BT itu bisa merepresentasikan <strong>part-of</strong> atau <strong>subordinate/variant</strong>, RT itu bisa sebagai <strong>cause/effect</strong> atau sebagai <strong>peralatan/produk</strong></p>
+<p>Bila misal kita memiliki hubungan:</p>
+<pre><code class='language-mermaid' lang='mermaid'>graph LR;
+furniture ---&gt;|NT| mirror;
+mirror ---&gt;|NT| mmir(makeup mirror);
+</code></pre>
+<p>Saat kita mencari furnitur, makeup mirror juga bakal diangkat, padahal ga termasuk </p>
+<p><img src="assets/d146bc4088466ac975a8097214598960.jpeg" alt="Jual Lighted Vanity Mirror USB 1X/7X Double Sided Magnifying Mirror with  Dimmable Contact Screen Makeup Mirrors Rose Gold | Shopee Indonesia" style="zoom:25%;" /></p>
+<p>Ini bukan furnitur</p>
+<h5 id='ontologi'>Ontologi</h5>
+<p>Ontologi itu merupakan konseptualisasi. Di dunia nyata kita bisa abstraksikan ke konsep konsep. Ontologi mendeskripsikan konsep dan objek pada domain serta berbagai vokabulari yang mendeskripsikannya</p>
+<p>Ada concept untuk dimengerti mesin, dan terminologi untuk dimengerti manusia</p>
+<p>Definisinya:</p>
+<ul>
+<li>Formal: Syntax dan semantic formal</li>
+<li>Eksplisit: Bisa direpresentasikan dan diproses secara algoritmis, dimengerti oleh mesin</li>
+<li>Shared: Standarnya disetujui oleh kumintas pengguna, memfasilitasi komunikasi</li>
+<li>Konseptualisasi: Memberikan model di dunia nyata</li>
+
+</ul>
+<h5 id='kosa-kata-vocabulary'>Kosa Kata (Vocabulary)</h5>
+<p>Biasanya istilah untuk model metadata yang merepresentasikan domain</p>
+<ul>
+<li>RDFS</li>
+<li>FOAF (Friend of a Friend) (Buat network of people)</li>
+<li>Dublin Core (Buat jurnal) (prefixnya biasanya dc)</li>
+
+</ul>
+<h5 id='component-dari-ontology'>Component dari Ontology</h5>
+<ul>
+<li>Classes (Tipe, jenis, urutan, kategori)</li>
+<li>Individu (Instance dan Objek)</li>
+<li>Attributes (Properties, slots)</li>
+<li>Relations (Properties, slots)</li>
+<li>Rules dan Axiomsnya</li>
+
+</ul>
+<p>Ontologi juga bisa ditambah menggunakan reasoning, membuatnya menjadi semakin luas dan kompleks</p>
+<p>Ontologi digunakan untuk</p>
+<ul>
+<li><p>Interoperabilitas semantik untuk berbagi konsep</p>
+</li>
+<li><p>Tujuan reasoning</p>
+<ul>
+<li>Pengembangan ontologi</li>
+<li>Information retrieval untuk query expansion</li>
+
+</ul>
+</li>
+
+</ul>
+<h5 id='skos'>SKOS</h5>
+<p>Ada relation broader, ada relation broaderTransitive untuk membedakan broader relationsnya</p>
+<p><img src="assets/broaderTransitive.jpg" referrerpolicy="no-referrer" alt="SKOS Simple Knowledge Organization System Primer"></p>
+<p>SKOS juga memiliki beberapa reasoning rules, misalnya untuk borderTransitivity yang bsia otomatis diinfer,</p>
+<p><img src="assets/ex-ukat.png" referrerpolicy="no-referrer" alt="SKOS Core Guide"></p>
+<p>Di SKOS, skos:broader/narrower/related dapat dispesifikasikan lagi untuk memiliki beberapa subProperty, misalnya </p>
+<pre><code>ex:partOf rdfs:subPropertyOf skos:broader .
+</code></pre>
+<p>Untuk memberikan hubungan kecocokan, ada <code>skos:exactMatch</code>, <code>skos:closeMatch</code>.</p>
+<p>Ada juga variasi lain</p>
+<ul>
+<li>skos:broadMatch (&lt; skos:broader)</li>
+<li>skos:narrowMatch (&lt; skos:narrower)</li>
+
+</ul>
+<ul>
+<li>skos:relatedMatch (&lt; skos:related)</li>
+
+</ul>
+<p>Misal saat kita ingin mengintegrasikan dua dataset, itu kita bisa hubungkan dengan relation ini</p>
+<h5 id='owl'>OWL</h5>
+<p>Di OWL, selain property, kita bisa tentuin kardinalitasnya, ukurannya, serta hubungan hubungannya</p>
+</body>
+</html>

@@ -1,0 +1,687 @@
+@prefix : <https://example.org/graph/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+rdf:Alt a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Alt,
+    rdfs:Container,
+    rdfs:Resource .
+
+rdf:Bag a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Bag,
+    rdfs:Container,
+    rdfs:Resource .
+
+rdf:List a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:List,
+    rdfs:Resource .
+
+rdf:Property a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Property,
+    rdfs:Resource .
+
+rdf:Seq a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Seq,
+    rdfs:Container,
+    rdfs:Resource .
+
+rdf:Statement a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Statement,
+    rdfs:Resource .
+
+rdf:XMLLiteral a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:XMLLiteral,
+    rdfs:Literal,
+    rdfs:Resource .
+
+rdfs:Class a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Class,
+    rdfs:Resource .
+
+rdfs:Container a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Container,
+    rdfs:Resource .
+
+rdfs:ContainerMembershipProperty a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Property,
+    rdfs:ContainerMembershipProperty,
+    rdfs:Resource .
+
+rdfs:Datatype a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource .
+
+rdfs:Literal a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource .
+
+rdfs:Resource a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf rdfs:Resource .
+
+xsd:NCName a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:NCName,
+    xsd:Name,
+    xsd:normalizedString,
+    xsd:string,
+    xsd:token .
+
+xsd:NMTOKEN a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:NMTOKEN,
+    xsd:normalizedString,
+    xsd:string,
+    xsd:token .
+
+xsd:Name a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:Name,
+    xsd:normalizedString,
+    xsd:string,
+    xsd:token .
+
+xsd:anyURI a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:anyURI .
+
+xsd:base64Binary a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:base64Binary .
+
+xsd:boolean a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:boolean .
+
+xsd:byte a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:byte,
+    xsd:decimal,
+    xsd:int,
+    xsd:integer,
+    xsd:long,
+    xsd:short .
+
+xsd:dateTime a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:dateTime .
+
+xsd:dateTimeStamp a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:dateTime,
+    xsd:dateTimeStamp .
+
+xsd:decimal a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal .
+
+xsd:double a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:double .
+
+xsd:float a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:float .
+
+xsd:hexBinary a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:hexBinary .
+
+xsd:int a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:int,
+    xsd:integer,
+    xsd:long .
+
+xsd:integer a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer .
+
+xsd:language a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:language,
+    xsd:normalizedString,
+    xsd:string,
+    xsd:token .
+
+xsd:long a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:long .
+
+xsd:negativeInteger a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:negativeInteger,
+    xsd:nonPositiveInteger .
+
+xsd:nonNegativeInteger a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonNegativeInteger .
+
+xsd:nonPositiveInteger a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonPositiveInteger .
+
+xsd:normalizedString a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:normalizedString,
+    xsd:string .
+
+xsd:positiveInteger a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonNegativeInteger,
+    xsd:positiveInteger .
+
+xsd:short a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:int,
+    xsd:integer,
+    xsd:long,
+    xsd:short .
+
+xsd:string a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:string .
+
+xsd:token a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:normalizedString,
+    xsd:string,
+    xsd:token .
+
+xsd:unsignedByte a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonNegativeInteger,
+    xsd:unsignedByte,
+    xsd:unsignedInt,
+    xsd:unsignedLong,
+    xsd:unsignedShort .
+
+xsd:unsignedInt a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonNegativeInteger,
+    xsd:unsignedInt,
+    xsd:unsignedLong .
+
+xsd:unsignedLong a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonNegativeInteger,
+    xsd:unsignedLong .
+
+xsd:unsignedShort a
+    rdfs:Class,
+    rdfs:Datatype,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Literal,
+    rdfs:Resource,
+    xsd:decimal,
+    xsd:integer,
+    xsd:nonNegativeInteger,
+    xsd:unsignedInt,
+    xsd:unsignedLong,
+    xsd:unsignedShort .
+
+:A a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :A,
+    :C,
+    :G .
+
+:B a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :B,
+    :D,
+    :G,
+    :H .
+
+:C a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :C,
+    :G .
+
+:D a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :D,
+    :G,
+    :H .
+
+:E a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :E,
+    :G .
+
+:F a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :F,
+    :H .
+
+:G a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :G .
+
+:H a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :H .
+
+() a
+    rdf:List,
+    rdfs:Resource .
+
+rdf:first a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:List ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdf:first .
+
+rdf:object a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Statement ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdf:object .
+
+rdf:predicate a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Statement ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdf:predicate .
+
+rdf:rest a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:List ;
+  rdfs:range rdf:List ;
+  rdfs:subPropertyOf rdf:rest .
+
+rdf:subject a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Statement ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdf:subject .
+
+rdf:type a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdf:type .
+
+rdf:value a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdf:value .
+
+rdfs:comment a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf rdfs:comment .
+
+rdfs:domain a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Property ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdfs:domain .
+
+rdfs:isDefinedBy a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf
+    rdfs:isDefinedBy,
+    rdfs:seeAlso .
+
+rdfs:label a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf rdfs:label .
+
+rdfs:member a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdfs:member .
+
+rdfs:range a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Property ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdfs:range .
+
+rdfs:subClassOf a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Class ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdfs:subClassOf .
+
+rdfs:subPropertyOf a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Property ;
+  rdfs:range rdf:Property ;
+  rdfs:subPropertyOf rdfs:subPropertyOf .
+
+:p1 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :A ;
+  rdfs:range :B ;
+  rdfs:subPropertyOf
+    :p1,
+    :q1 .
+
+:p2 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:subPropertyOf
+    :p2,
+    :q1 .
+
+:p3 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :E ;
+  rdfs:range :F ;
+  rdfs:subPropertyOf
+    :p3,
+    :q2 .
+
+:p4 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:subPropertyOf
+    :p4,
+    :q2 .
+
+rdfs:seeAlso a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf rdfs:seeAlso .
+
+:a1 a
+    rdfs:Resource,
+    :A,
+    :C,
+    :G,
+    :H ;
+  :p1 :a2 ;
+  :q1 :a2 .
+
+:a2 a
+    rdfs:Resource,
+    :B,
+    :C,
+    :D,
+    :G,
+    :H ;
+  :p2 :a3 ;
+  :q1 :a3 .
+
+:a3 a
+    rdfs:Resource,
+    :D,
+    :E,
+    :G,
+    :H ;
+  :p3 :a4 ;
+  :q2 :a4 .
+
+:a4 a
+    rdfs:Resource,
+    :F,
+    :G,
+    :H ;
+  :p4 :a1 ;
+  :q2 :a1 .
+
+:q1 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :C ;
+  rdfs:range :D ;
+  rdfs:subPropertyOf :q1 .
+
+:q2 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :G ;
+  rdfs:range :H ;
+  rdfs:subPropertyOf :q2 .
+

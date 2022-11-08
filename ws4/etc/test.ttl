@@ -1,0 +1,39 @@
+
+<https://example.org/graph/p1> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/graph/A>;
+  <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/graph/B>;
+  <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <https://example.org/graph/q1> .
+
+<https://example.org/graph/p2> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <https://example.org/graph/q1> .
+
+<https://example.org/graph/p3> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/graph/E>;
+  <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/graph/F>;
+  <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <https://example.org/graph/q2> .
+
+<https://example.org/graph/p4> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <https://example.org/graph/q2> .
+
+<https://example.org/graph/A> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/graph/C> .
+
+<https://example.org/graph/B> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/graph/D> .
+
+<https://example.org/graph/E> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/graph/G> .
+
+<https://example.org/graph/F> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/graph/H> .
+
+<https://example.org/graph/a1> <https://example.org/graph/p1> <https://example.org/graph/a2> .
+
+<https://example.org/graph/a2> <https://example.org/graph/p2> <https://example.org/graph/a3> .
+
+<https://example.org/graph/a3> <https://example.org/graph/p3> <https://example.org/graph/a4> .
+
+<https://example.org/graph/a4> <https://example.org/graph/p4> <https://example.org/graph/a1> .
+
+<https://example.org/graph/C> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/graph/G> .
+
+<https://example.org/graph/D> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/graph/H>,
+    <https://example.org/graph/G> .
+
+<https://example.org/graph/q1> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/graph/C>;
+  <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/graph/D> .
+
+<https://example.org/graph/q2> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/graph/G>;
+  <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/graph/H> .

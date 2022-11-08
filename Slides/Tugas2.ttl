@@ -1,0 +1,285 @@
+# Nama: Hocky Yudhiono
+# NPM: 1906285604
+# Kelas: Jejaring Semantik 2022/2023 Genap
+# Worksheet 2
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix hoc: <http://hocky.id/entity/> .
+@prefix rel: <http://hocky.id/rel#> .
+@prefix matkul: <https://academic.ui.ac.id/main/Course/Detail/> .
+@prefix kelas: <https://academic.ui.ac.id/main/Academic/Detail/> .
+@prefix dosen: <https://cs.ui.ac.id/personnel/> .
+
+hoc:TA1920
+  rdfs:label "TA 2019/2020" ;
+  rdf:type hoc:TahunAkademik ;
+  rel:memiliki hoc:TA1920T1, hoc:TA1920T2 .
+
+hoc:TA2021
+  rdfs:label "TA 2020/2021" ;
+  rdf:type hoc:TahunAkademik ;
+  rel:memiliki hoc:TA2021T1 .
+
+hoc:TA1920T1
+  rdfs:label "TA 2019/2020 T1" ;
+  rdf:type hoc:TermAkademik .
+
+hoc:TA1920T2
+  rdfs:label "TA 2019/2020 T2" ;
+  rdf:type hoc:TermAkademik .
+
+hoc:TA2021T1
+  rdfs:label "TA 2020/2021 T1" ;
+  rdf:type hoc:TermAkademik .
+
+hoc:sem1
+  rdfs:label "Semester 1" ;
+  rdf:type hoc:Semester ;
+  rel:mengambil
+    matkul:CSGE601020,
+    matkul:UIST601111,
+    matkul:CSGE601010 ;
+  rel:pada hoc:TA1920T1 .
+
+hoc:sem2
+  rdfs:label "Semester 2" ;
+  rdf:type hoc:Semester ;
+  rel:mengambil
+    matkul:CSGE601021,
+    matkul:UIST601014,
+    matkul:CSGE601011,
+    matkul:CSCE604226,
+    matkul:CSCM601150 ;
+  rel:pada hoc:TA1920T2 .
+
+hoc:sem3
+  rdfs:label "Semester 3" ;
+  rdf:type hoc:Semester ;
+  rel:mengambil
+    matkul:CSGE602012,
+    matkul:CSCM602115,
+    matkul:CSCM601252,
+    matkul:CSGE602022,
+    matkul:CSGE602013,
+    matkul:CSGE602040 ;
+  rel:pada hoc:TA2021T1 .
+
+rel:done rdfs:label "Sudah Menempuh" .
+
+hoc:hocky
+  rdfs:label "Hocky Yudhiono" ;
+  rdf:type hoc:Mahasiswa ;
+  rel:done hoc:sem1, hoc:sem2, hoc:sem3 .
+
+# Start of Dosen
+
+dosen:ari-saptawijaya
+  rdfs:label "Ari Saptawijaya S.Kom., M.Sc., Ph.D." ;
+  rdf:type hoc:Dosen .
+
+dosen:arlisa-yuliawati
+  rdfs:label "Arlisa Yuliawati, S.Kom., M.Kom." ;
+  rdf:type hoc:Dosen .
+
+dosen:denny
+  rdfs:label "Denny S.Kom., M.I.T., Ph.D." ;
+  rdf:type hoc:Dosen .
+
+dosen:kasiyah
+  rdfs:label "Dr. Dra. Kasiyah M.Sc." ;
+  rdf:type hoc:Dosen .
+
+dosen:erdefi-rakun
+  rdfs:label "Dr. Ir. Erdefi Rakun M.Sc." ;
+  rdf:type hoc:Dosen .
+
+dosen:lim-yohanes-stefanus
+  rdfs:label "Drs. Lim Yohanes Stefanus M.Math., Ph.D." ;
+  rdf:type hoc:Dosen .
+
+dosen:evi-yulianti
+  rdfs:label "Evi Yulianti M.Comp.Sc., Ph.D." ;
+  rdf:type hoc:Dosen .
+
+dosen:gladhi-guarddin
+  rdfs:label "Gladhi Guarddin, S.Kom., M.Kom." ;
+  rdf:type hoc:Dosen .
+
+dosen:iis-afriyanti
+  rdfs:label "Iis Afriyanti, S.Kom., M.Sc." ;
+  rdf:type hoc:Dosen .
+
+dosen:adhi-yuniarto-laurentius-yohanes
+  rdfs:label "Ir. Adhi Yuniarto Laurentius Yohannes M.Kom." ;
+  rdf:type hoc:Dosen .
+
+dosen:mei-silviana-saputri
+  rdfs:label "Mei Silviana Saputri, S.Kom., M.Kom." ;
+  rdf:type hoc:Dosen .
+
+hoc:nilam-fitriah
+  rdfs:label "Nilam Fitriah, M.Si." ;
+  rdf:type hoc:Dosen .
+
+dosen:noverina-alfiany
+  rdfs:label "Noverina Alfiany, M.Si." ;
+  rdf:type hoc:Dosen .
+
+dosen:t-basaruddin-eng
+  rdfs:label "Prof. Drs. T. Basaruddin M.Sc., Ph.D." ;
+  rdf:type hoc:Dosen .
+
+dosen:heru-suhartanto
+  rdfs:label "Prof. Heru Suhartanto M.Sc., Ph.D." ;
+  rdf:type hoc:Dosen .
+
+# Start of MataKuliah
+matkul:CSGE601020
+  rdfs:label "Dasar-Dasar Pemrograman 1" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:607788 .
+
+matkul:UIST601111
+  rdfs:label "Fisika Dasar" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:611383 .
+
+matkul:CSGE601010
+  rdfs:label "Matematika Diskret 1" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:608186 .
+
+matkul:CSGE601021
+  rdfs:label "Dasar-dasar Pemrograman 2" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:620016 ;
+  rel:membutuhkan matkul:CSGE601020 .
+
+matkul:UIST601014
+  rdfs:label "Matematika Dasar 1" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:620077 .
+
+matkul:CSGE601011
+  rdfs:label "Matematika Diskret 2" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:620137 .
+
+matkul:CSCE604226
+  rdfs:label "Pemrograman Kompetitif" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:620289 ;
+  rel:membutuhkan matkul:CSGE602040 .
+
+matkul:CSCM601150
+  rdfs:label "Pengantar Sistem Dijital" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:620207 .
+
+matkul:CSGE602012
+  rdfs:label "Aljabar Linier" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:632538 ;
+  rel:membutuhkan matkul:CSGE601010 .
+
+matkul:CSCM602115
+  rdfs:label "Matematika Dasar 2" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:632608 ;
+  rel:membutuhkan matkul:UIST601014 .
+
+matkul:CSCM601252
+  rdfs:label "Pengantar Organisasi Komputer" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:632591 ;
+  rel:membutuhkan matkul:CSCM601150 .
+
+matkul:CSGE602022
+  rdfs:label "Perancangan & Pemrograman Web" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:632570 ;
+  rel:membutuhkan matkul:CSGE601020 .
+
+matkul:CSGE602013
+  rdfs:label "Statistika & Probabilitas" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:640199 ;
+  rel:membutuhkan matkul:UIST601014, matkul:CSGE601010 .
+
+matkul:CSGE602040
+  rdfs:label "Struktur Data & Algoritma" ;
+  rdf:type hoc:MataKuliah ;
+  rel:mengambil kelas:632625 ;
+  rel:membutuhkan matkul:CSGE601021 .
+
+# Start of Kelas
+kelas:607788
+  rdfs:label "DDP 1 - A" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:lim-yohanes-stefanus .
+
+kelas:611383
+  rdfs:label "FisDas - G" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:lim-yohanes-stefanus .
+
+kelas:608186
+  rdfs:label "MD 1 - G" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:ari-saptawijaya .
+
+kelas:620016
+  rdfs:label "DDP 2 - E" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:nilam-fitriah, dosen:evi-yulianti .
+
+kelas:620077
+  rdfs:label "MatDas 1 - A" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:noverina-alfiany, dosen:t-basaruddin-eng .
+
+kelas:620137
+  rdfs:label "MD 2 - E" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:arlisa-yuliawati .
+
+kelas:620289
+  rdfs:label "CP" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:denny .
+
+kelas:620207
+  rdfs:label "PSD - A" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:erdefi-rakun .
+
+kelas:632538
+  rdfs:label "Alin - C" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:kasiyah .
+
+kelas:632608
+  rdfs:label "MatDas 2 - A" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:heru-suhartanto, dosen:noverina-alfiany .
+
+kelas:632591
+  rdfs:label "POK - C" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:adhi-yuniarto-laurentius-yohanes .
+
+kelas:632570
+  rdfs:label "PPW - B" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:gladhi-guarddin .
+
+kelas:640199
+  rdfs:label "Statprob - K" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:lim-yohanes-stefanus .
+
+kelas:632625
+  rdfs:label "SDA - E" ;
+  rdf:type hoc:Kelas ;
+  rel:dibimbing dosen:mei-silviana-saputri .

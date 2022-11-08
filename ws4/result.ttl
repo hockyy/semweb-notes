@@ -1,0 +1,209 @@
+@prefix : <https://example.org/graph/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Hasil entailment dasar
+rdf:Property a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdf:Property,
+    rdfs:Resource .
+
+# Hasil entailment dasar
+rdfs:Class a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Class,
+    rdfs:Resource .
+
+# Hasil entailment dasar
+rdfs:Resource a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf rdfs:Resource .
+
+:A a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :A,
+    :C,
+    :G .
+
+:B a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :B,
+    :D,
+    :G,
+    :H .
+
+:C a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :C,
+    :G .
+
+:D a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :D,
+    :G,
+    :H .
+
+:E a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :E,
+    :G .
+
+:F a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :F,
+    :H .
+
+:G a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :G .
+
+:H a
+    rdfs:Class,
+    rdfs:Resource ;
+  rdfs:subClassOf
+    rdfs:Resource,
+    :H .
+
+rdf:type a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdf:type .
+
+rdfs:domain a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Property ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdfs:domain .
+
+rdfs:range a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Property ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdfs:range .
+
+rdfs:subClassOf a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdfs:Class ;
+  rdfs:range rdfs:Class ;
+  rdfs:subPropertyOf rdfs:subClassOf .
+
+rdfs:subPropertyOf a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain rdf:Property ;
+  rdfs:range rdf:Property ;
+  rdfs:subPropertyOf rdfs:subPropertyOf .
+
+:p1 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :A ;
+  rdfs:range :B ;
+  rdfs:subPropertyOf
+    :p1,
+    :q1 .
+
+:p2 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:subPropertyOf
+    :p2,
+    :q1 .
+
+:p3 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :E ;
+  rdfs:range :F ;
+  rdfs:subPropertyOf
+    :p3,
+    :q2 .
+
+:p4 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:subPropertyOf
+    :p4,
+    :q2 .
+
+:a1 a
+    rdfs:Resource,
+    :A,
+    :C,
+    :G,
+    :H ;
+  :p1 :a2 ;
+  :q1 :a2 .
+
+:a2 a
+    rdfs:Resource,
+    :B,
+    :C,
+    :D,
+    :G,
+    :H ;
+  :p2 :a3 ;
+  :q1 :a3 .
+
+:a3 a
+    rdfs:Resource,
+    :D,
+    :E,
+    :G,
+    :H ;
+  :p3 :a4 ;
+  :q2 :a4 .
+
+:a4 a
+    rdfs:Resource,
+    :F,
+    :G,
+    :H ;
+  :p4 :a1 ;
+  :q2 :a1 .
+
+:q1 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :C ;
+  rdfs:range :D ;
+  rdfs:subPropertyOf :q1 .
+
+:q2 a
+    rdf:Property,
+    rdfs:Resource ;
+  rdfs:domain :G ;
+  rdfs:range :H ;
+  rdfs:subPropertyOf :q2 .
+

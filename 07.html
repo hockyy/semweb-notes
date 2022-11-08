@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>07</title>
+</head>
+<body><h5 id='syntax-vs-semantics'>Syntax vs. Semantics</h5>
+<h5 id='syntax'>Syntax</h5>
+<ul>
+<li>Merupakan Proportitional Variables</li>
+<li>Syntax merupakan koleksi simbol dan term bersamaan dengan rules, untuk membentuk suatu sentence yang dianggap valid.</li>
+<li>Koleksi dari terms itu kita sebut dengan vocabulary.</li>
+
+</ul>
+<h5 id='statement'>Statement</h5>
+<ul>
+<li><p>Setiap proporsitional variable itu adalah sebuah statement.</p>
+</li>
+<li><p>Jika misalnya a dan b adalah statement, maka:</p>
+<ul>
+<li>\(a \and b\) merupakan statement</li>
+<li>\(a \or b\) merupakan statement</li>
+<li>\(a \implies b\) merupakan statement</li>
+<li>\(a \iff b\) merupakan statement</li>
+
+</ul>
+</li>
+
+</ul>
+<h5 id='semantics-basis-logic'>Semantics (Basis logic)</h5>
+<ul>
+<li>Merupakan himpunan semesta.</li>
+<li>mapping statement to himpunan semesta</li>
+<li>Meaning dari syntax.</li>
+<li>Didefinisikan dengan himpunan,</li>
+<li>Interpretasi yang menspesifikan setiap simbol dan statement itu artinya apa dan kapan sebuah statement disebut true atau false.</li>
+
+</ul>
+<blockquote><p><strong>Syntax is the grammatical structure of the text, whereas semantics is the meaning being conveyed</strong></p>
+</blockquote>
+<h5 id='entailment'>Entailment</h5>
+<p>Hubungan antara statement yang true saat diketahui suatu himpunan statement itu true.</p>
+<p>Suatu himpunan \(G\) disebut <strong>entails</strong> sebuah himpunan lain \(H\), bila setiap interpretasi \(I\) dari \(G\) yang membuat \(G\) benar juga membuat \(H\) benar.</p>
+<div>$$
+G: \{p \implies q, p\}\\
+H: \{q\}
+$$</div>
+<p>Jadi cara untuk mengecek entailment adalah looping setiap interpretasi yang membuat \(G\) benar, terus apabila ada satu saja yang membuat \(H\) salah, maka itu tidak entail.</p>
+<h5 id='reasoninginference'>Reasoning/inference:</h5>
+<p>Diberikan dua buah himpunan \(G\) dan \(H\), cek apakah \(G\) entails \(H\), intinya ini proses inferensi.</p>
+<h5 id='semantic-dari-rdf-graph'>Semantic dari RDF Graph</h5>
+<ul>
+<li><p>Graf RDF itu hanya himpunan triple</p>
+<ul>
+<li>Tidak ada deskripsi tentang struktur dan bentuknya</li>
+<li>Tidak ada makna spesifik yang diberikan kepada setiap IRI</li>
+
+</ul>
+</li>
+
+</ul>
+<p>Sebuah RDF graph true bila semua triplenya true, dan definisi dari triple true jika dan hanya jika ada sebuah relasi binary yang diidentifikasi dengan \(p\) yang menhubungkan entity \(s\) dan entity lain \(o\).</p>
+<ul>
+<li>Kebanyakan triple hampir selalu true</li>
+<li>Jika \(o\) literal, maka bentuk lexicalnya mesti cocok dengan tipe datanya, <code>&quot;test&quot;^^xsd:integer</code> itu ill typed dan bermasalah.</li>
+
+</ul>
+<p>&nbsp;</p>
+<p>RDF triple itu dinyatakan dalam bentuk \((s, p, o)\).</p>
+<ul>
+<li>\(s\), subject, bsia IRI atau blank node.</li>
+<li>\(p\), mesti IRI</li>
+<li>\(o\), bisa IRI, blank, atau literal.</li>
+
+</ul>
+<p>Kalau RDF graph itu himpunan triple. Dari DELG, kita tinggal menentukan node mana ayng literal dan tipenya apa, terus sisanya bisa kita IRI dan jadikan dia object entitas sendiri.</p>
+<h5 id='entailment-of-rdf-graph'>Entailment of RDF Graph</h5>
+<pre><code>xxx ppp yyy .
+</code></pre>
+<p>entails </p>
+<pre><code>xxx ppp yyy .
+</code></pre>
+<hr />
+<pre><code>xxx ppp yyy .
+</code></pre>
+<p>entails </p>
+<pre><code>xxx ppp _:nnn .
+</code></pre>
+<hr />
+<pre><code>xxx ppp yyy .
+</code></pre>
+<p>entails </p>
+<pre><code>_:nnn ppp yyy .
+</code></pre>
+<hr />
+<pre><code>xxx ppp &quot;aaa&quot;^^ddd .
+</code></pre>
+<p>entails </p>
+<pre><code>xxx ppp _:nnn .
+_:nnn rdf:type ddd .
+</code></pre>
+<hr />
+<pre><code>xxx ppp yyy .
+</code></pre>
+<p>entails </p>
+<pre><code>ppp rdf:type rdf:Property .
+</code></pre>
+<p>entails </p>
+<pre><code>rdf:type rdf:type rdf:Property .
+</code></pre>
+<h5 id='rdfs-features'>RDFS Features</h5>
+<p>Pada RDF Schema, ada beberapa komponen penting:</p>
+<ul>
+<li>Model classes</li>
+<li>Instanec</li>
+<li>Property constraint</li>
+<li>Class</li>
+<li>Property Hierarchy</li>
+
+</ul>
+<h5 id='rdftype-dan-rdfsclass'>rdf:type dan rdfs:Class</h5>
+<pre><code class='language-turtle' lang='turtle'>:Surabaya a o:City .
+:Jakarta a o:City .
+o:City a rdfs:Class .
+</code></pre>
+<p>rdf:type merupakan relasi <strong>instance-of</strong> yang merupakan relasi yang menyatakan keanggotaan himpunan.</p>
+<p>Saat kita menggunakan relasi <strong>instance-of</strong>, itu sisi kanannya otomatis diinfer sebagai himpunan sebagai class.</p>
+<p>Secara semantik, <code>o:City</code> merupakan instance dari <code>rdfs:Class</code>, jadi sebenarnya baris ke tiga bisa diderive dari baris 1.</p>
+<p>SPARQL tidak memproses RDFS entailment. Namun, jika RDFS Entailment Regime di enable </p>
+<h5 id='rdfssubclassof'>rdfs:subclassOf</h5>
+<pre><code class='language-turtle' lang='turtle'>:UI rdf:type o:University .
+:Pertamina a o:OilCompany .
+o:University rdfs:subClassOf o:EducationInstitution .
+o:OilCompany rdfs:subClassOf o:ForProfitOrganization .
+o:EducationInstitution rdf:subClassOf rdfs:Organization .
+o:ForProfitOrganization rdf:subClassOf rdfs:Organization .
+</code></pre>
+<ul>
+<li><code>rdfs:subClassOf</code> merupakan sebuah relasi subhimpunan</li>
+<li>Line ke-3 berarti setiap instance  <code>o:University</code> juga merupakan instance dari <code>o:EducationInstitution</code>, implicationnya adalah <code>(x, rdf:type, o:University)</code> \(\implies\) <code>(x, rdf:type, o:EducationInstitution)</code></li>
+<li>Sebuah class bisa memiliki beberapa subclasses dan multiple superclass.</li>
+<li><code>rdfs:subClassOf</code> bentuknya transitif, jadi bisa membentuk hierarki kelas.</li>
+
+</ul>
+<p>Negasi doesn&#39;t exist in RDF. Tapi di (OWL Web Ontology Language) bisa. Semakin ekspresif sebuah bahasa, semakin mahal.</p>
+<h5 id='rdfproperty'>rdf:property</h5>
+<p>Pada dasarnya merupakan class setiap property. Untuk setiap predikat dari sebuah triple, itu disebut sebuah property.</p>
+<p>Property memiliki domain dan range, himpunan subjek dari sebuah properti disebut domain, himpunan objeknya bisa disebut range.</p>
+<h5 id='rdfsdomain-dan-rdfsrange'>rdfs:domain dan rdfs:range</h5>
+<pre><code class='language-turtle' lang='turtle'>o:taughtBy rdfs:domain o:Course .
+o:taughtBy rdfs:range o:FacultyMember .
+</code></pre>
+<ul>
+<li><p>Line 1 implies</p>
+<ul>
+<li><code>o:taughtBy</code> instance dari <code>rdf:Property</code>.</li>
+<li><code>o:Course</code> instance dari <code>rdf:Class</code>.</li>
+<li><code>(x, o:taughtBy, y)</code> \(\implies\) <code>x</code> instance dari <code>o:Course</code>.</li>
+
+</ul>
+</li>
+<li><p>Line 2 implies</p>
+<ul>
+<li><code>(x, o:taughtBy, y)</code> \(\implies\) <code>y</code> instance dari <code>o:FacultyMember</code>.</li>
+
+</ul>
+</li>
+
+</ul>
+<h5 id='rdfssubpropertyof'>rdfs:subPropertyOf</h5>
+<pre><code class='language-turtle' lang='turtle'>o:taughtBy rdfs:subPropertyOf o:involves 
+</code></pre>
+<ul>
+<li><code>(x, o:taughtBy, y)</code> \(\implies\)<code>(x, o:involves, y</code>) </li>
+
+</ul>
+</body>
+</html>

@@ -1,0 +1,62 @@
+@prefix : <https://example.org/graph/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+rdfs:domain rdfs:domain rdf:Property . # Axiom
+rdfs:domain rdf:type rdf:Property . # rdfD2
+rdfs:domain rdfs:range rdfs:Class . # Axiom
+
+rdf:type rdf:type rdf:Property . # Axiom
+rdf:type rdfs:domain rdfs:Resource . # Axiom
+rdf:type rdfs:range rdfs:Class . # Axiom
+
+rdfs:range rdfs:domain rdf:Property . # Axiom
+rdfs:range rdfs:range rdfs:Class . # Axiom
+rdfs:range rdf:type rdfs:Property . # rdfD2
+
+rdfs:subClassOf rdfs:domain rdfs:Class . # Axiom
+rdfs:subClassOf rdfs:range rdfs:Class . # Axiom
+rdfs:subClassOf rdf:type rdfs:Property . # rdfD2
+
+rdfs:subPropertyOf rdfs:domain rdf:Property . # Axiom
+rdfs:subPropertyOf rdfs:range rdf:Property . # Axiom
+rdfs:subPropertyOf rdf:type rdfs:Property . # rdfD2
+
+:a1 :p1 :a2 . # Soal
+:a2 :p2 :a3 . # Soal
+:a3 :p3 :a4 . # Soal
+:a4 :p4 :a1 . # Soal
+
+:p1 rdfs:subPropertyOf :q1 . # Soal
+:p2 rdfs:subPropertyOf :q1 . # Soal
+:p3 rdfs:subPropertyOf :q2 . # Soal
+:p4 rdfs:subPropertyOf :q2 . # Soal
+
+:p1 rdfs:domain :A . # Soal
+:p1 rdfs:range :B . # Soal
+:p1 rdf:type rdfs:Property . # rdfD2
+
+:q1 rdfs:domain :C . # Soal
+:q1 rdfs:range :D . # Soal
+:q1 rdf:type rdfs:Property . # rdfD2
+
+:p3 rdfs:domain :E . # Soal
+:p3 rdfs:range :F . # Soal
+:p3 rdf:type rdfs:Property . # rdfD2
+
+:q2 rdfs:domain :G . # Soal
+:q2 rdfs:range :H . # Soal
+:q2 rdf:type rdfs:Property . # rdfD2
+
+:A rdfs:subClassOf :C . # Soal
+:A a rdfs:Class . # rdfs2
+:B rdfs:subClassOf :D . # Soal
+:B a rdfs:Class . # rdfs2
+:E rdfs:subClassOf :G . # Soal
+:E a rdfs:Class . # rdfs2
+:F rdfs:subClassOf :H . # Soal
+:C rdfs:subClassOf :G . # Soal
+:D rdfs:subClassOf :H . # Soal
+:D rdfs:subClassOf :G . # Soal
+

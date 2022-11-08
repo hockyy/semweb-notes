@@ -1,0 +1,31 @@
+@prefix : <https://example.org/graph/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:a1 :p1 :a2 .
+:a2 :p2 :a3 .
+:a3 :p3 :a4 .
+:a4 :p4 :a1 .
+
+:p1 rdfs:subPropertyOf :q1 .
+:p2 rdfs:subPropertyOf :q1 .
+:p3 rdfs:subPropertyOf :q2 .
+:p4 rdfs:subPropertyOf :q2 .
+
+:p1 rdfs:domain :A .
+:p1 rdfs:range :B .
+:q1 rdfs:domain :C .
+:q1 rdfs:range :D .
+:p3 rdfs:domain :E .
+:p3 rdfs:range :F .
+:q2 rdfs:domain :G .
+:q2 rdfs:range :H .
+
+:A rdfs:subClassOf :C .
+:B rdfs:subClassOf :D .
+:E rdfs:subClassOf :G .
+:F rdfs:subClassOf :H .
+:C rdfs:subClassOf :G .
+:D rdfs:subClassOf :H .
+:D rdfs:subClassOf :G .
