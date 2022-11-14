@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>11</title>
+</head>
+<body><h4 id='component-technologies-untuk-semantic-web'>Component Technologies Untuk Semantic Web</h4>
+<ul>
+<li><p>Bahasa untuk data exchange: RDF</p>
+</li>
+<li><p>Vocabulary atau skema bahasa: SKOS dan OWL</p>
+</li>
+<li><p>Query language SPARQL</p>
+</li>
+<li><p>Rules for reasoning: RIF, SWRL, SPIN</p>
+<ul>
+<li>Digunakan untuk validating bisa, reasoning juga bisa, mengetahui apakah semantiknya benar atau tidak dari data yang kita punya</li>
+
+</ul>
+</li>
+
+</ul>
+<p>Salah satunya adalah OWL, memberikan definisi secara formal berbasis logika.</p>
+<p>Ada ontology editor yang namanya Protégé, dibuat dari departemen biomedik, awalnya gunanya buat bikin ensiklopedia gitu gitu.</p>
+<p>OWL merupakan bahasa standar untuk merepresentasikan vocabulary, ontologi atau schema, dia lebih kaya dari RDFS dan SKOS (rekomendasi dari W3C untuk vocabulary yang lightweight). OWL 2 sekarang menjadi rekomendasi sebagai basis vocabulary untuk Semantic Web.</p>
+<p>Di OWL, kita bisa spesifikasikan hubungan atau himpunan antara set. Kebutuhan suatu bahasa ontology adalah:</p>
+<ul>
+<li><strong>Syntax</strong></li>
+<li><strong>Semantic</strong> yang formal</li>
+<li>Cukup <strong>ekspresif</strong></li>
+<li>Bisa mendukung <strong>reasoning</strong> yang efisien.</li>
+
+</ul>
+<p>Ada software atau tools yang namanya reasoner, atau reasoning engine.</p>
+<ul>
+<li><p>Input: Ontology atau Knowledge Base, Himpunan Logical Statement</p>
+</li>
+<li><p>Output: Konsisten atau Inkonsisten</p>
+<ul>
+<li>Output bisa juga berupa extension reasoner, atau apa saja yang bisa diinfer dari knowledge base yang ada, dia bakal mencari semua interpretasi yang benar lainnya untuk knowledge base yang kita punya saat ini.</li>
+
+</ul>
+</li>
+
+</ul>
+<blockquote><p>Propositional Logic converts a complete sentence into a symbol and makes it logical whereas in First-Order Logic relation of a particular sentence will be made that involves relations, constants, functions, and constants. </p>
+</blockquote>
+<p>Pada propositional logic, saat kita ingin menghitung entailment, itu decidable, karena perhitungan komputasinya finite.</p>
+<p>Pada First order logic lebih ekspresif, dia undecidable, karena dia besar kemungkinannya banyak yang dideskripsikan oleh relasi, fungsi dan constants.</p>
+<p>Pada OWL, ada yang namanya descriptional logic, dia bisa union, intersection, dan bisa complement.</p>
+<p>Pada standard OWL kita bisa serialisasi OWL dalam syntax RDF, OWL ini bisa dibilang dibangun di atas RDF.</p>
+<p>OWL ditulis dalam Functional style </p>
+<p>Di owl, bisa menggunakan equivalence class, yang mengimplikasikan:</p>
+<pre><code class='language-turtle' lang='turtle'>:a owl:equivalentClass :b .
+
+
+:a rdfs:subClassOf :b .
+:b rdfs:subClassOf :a .
+</code></pre>
+<p>Bisa juga ada distinctness buat menandakan perbedaan:</p>
+<pre><code class='language-turtle' lang='turtle'>[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :James
+                        :James2
+                      )
+] .
+</code></pre>
+<p>Misalkan:</p>
+<pre><code>Bill, James, Jim, John, Mary
+James = Jim
+Bill != John
+{Bill, James, Jim, John} = Male
+{Mary} = Female
+</code></pre>
+<p>Maksimum: Tidak ada, karena open world.</p>
+<p>Minimum:</p>
+<pre><code>{Bill/James/Jim, John, Mary}
+</code></pre>
+<p>Exactly: unknown</p>
+<h4 id='more-about-owl'>More about OWL</h4>
+<p>Bisa define disjoint classes, membedakan atau menyamakan instance, mendefinisikan class merupakan intersection, atau union dari class lain, bisa juga complement, kalau ingin mendefinisikan suatu type kosong, bisa bikin dia subclass dari owl:Nothing.</p>
+<p>&nbsp;</p>
+</body>
+</html>
