@@ -1,0 +1,165 @@
+@prefix : <http://example.org/vocab#> .
+@prefix v: <http://example.org/vocab#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://example.org/vocab> .
+
+<http://example.org/vocab> rdf:type owl:Ontology ;
+                            rdfs:comment "This is an example ontology for the Semantic Web class at Fasilkom UI." ;
+                            rdfs:label "Example Ontology" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/vocab#hasChild
+v:hasChild rdf:type owl:ObjectProperty .
+
+
+###  http://example.org/vocab#loves
+v:loves rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/vocab#A
+v:A rdf:type owl:Class .
+
+
+###  http://example.org/vocab#Father
+v:Father rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( v:Man
+                                                    v:Parent
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] .
+
+
+###  http://example.org/vocab#HappyPerson
+v:HappyPerson rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                    owl:onProperty v:hasChild ;
+                                    owl:allValuesFrom v:HappyPerson
+                                  ] .
+
+
+###  http://example.org/vocab#Human
+v:Human rdf:type owl:Class ;
+        owl:equivalentClass v:Person .
+
+
+###  http://example.org/vocab#Man
+v:Man rdf:type owl:Class ;
+      rdfs:subClassOf v:Person ;
+      owl:disjointWith v:Woman .
+
+
+###  http://example.org/vocab#Mother
+v:Mother rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( v:Parent
+                                                    v:Woman
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] .
+
+
+###  http://example.org/vocab#MyBirthdayGuest
+v:MyBirthdayGuest rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Class ;
+                                        owl:oneOf ( v:Bill
+                                                    v:John
+                                                    v:Mary
+                                                  )
+                                      ] .
+
+
+###  http://example.org/vocab#NarcissisticPerson
+v:NarcissisticPerson rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty v:loves ;
+                                           owl:hasSelf "true"^^xsd:boolean
+                                         ] .
+
+
+###  http://example.org/vocab#Parent
+v:Parent rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:unionOf ( v:Father
+                                             v:Mother
+                                           )
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty v:hasChild ;
+                               owl:someValuesFrom v:Person
+                             ] ;
+         rdfs:subClassOf v:Human .
+
+
+###  http://example.org/vocab#Person
+v:Person rdf:type owl:Class ;
+         rdfs:label "Person" .
+
+
+###  http://example.org/vocab#Woman
+v:Woman rdf:type owl:Class ;
+        rdfs:subClassOf v:Person ;
+        rdfs:label "Woman" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/vocab#Bill
+v:Bill rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/vocab#Jack
+v:Jack rdf:type owl:NamedIndividual ,
+                [ owl:intersectionOf ( v:Person
+                                       [ rdf:type owl:Class ;
+                                         owl:complementOf v:Parent
+                                       ]
+                                     ) ;
+                  rdf:type owl:Class
+                ] .
+
+
+###  http://example.org/vocab#James
+v:James rdf:type owl:NamedIndividual ;
+        owl:sameAs v:Jim ;
+        v:loves v:Jim .
+
+
+###  http://example.org/vocab#Jim
+v:Jim rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/vocab#John
+v:John rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/vocab#Mary
+v:Mary rdf:type owl:NamedIndividual ,
+                v:Woman ;
+       rdfs:label "Mary" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( v:Bill
+                        v:John
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
